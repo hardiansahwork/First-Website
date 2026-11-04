@@ -1,12 +1,193 @@
 <!DOCTYPE html>
 <html lang="id">
-<link rel="stylesheet" href="style.css">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Informasi Jadwal Masjid</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #0b2514; /* Nuansa hijau gelap islami */
+            color: #ffffff;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            overflow: hidden;
+        }
+
+        /* Header / Bagian Atas */
+        header {
+            background-color: #123d22;
+            padding: 20px 40px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 4px solid #d4af37; /* Aksen emas */
+        }
+        .masjid-info h1 {
+            font-size: 2.2rem;
+            color: #f39c12;
+            margin-bottom: 5px;
+        }
+        .masjid-info p {
+            font-size: 1.1rem;
+            color: #cbd5e1;
+        }
+        .datetime-box {
+            text-align: right;
+        }
+        #clock {
+            font-size: 3rem;
+            font-weight: bold;
+            color: #ffffff;
+            font-family: monospace;
+        }
+        #date {
+            font-size: 1.2rem;
+            color: #d4af37;
+        }
+
+        /* Konten Utama (Jadwal Sholat) */
+        .main-content {
+            padding: 30px 40px;
+            display: flex;
+            gap: 20px;
+            flex: 1;
+        }
+        .schedule-grid {
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+            gap: 20px;
+            width: 100%;
+        }
+        .schedule-card {
+            background: rgba(255, 255, 255, 0.05);
+            border: 2px solid rgba(212, 175, 55, 0.3);
+            border-radius: 12px;
+            text-align: center;
+            padding: 25px 15px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+            transition: transform 0.3s;
+        }
+        .schedule-card.active {
+            background: #d4af37;
+            color: #0b2514;
+            border-color: #fff;
+            transform: scale(1.05);
+        }
+        .schedule-card.active .time {
+            color: #0b2514;
+        }
+        .schedule-card h3 {
+            font-size: 1.6rem;
+            margin-bottom: 15px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        .schedule-card .time {
+            font-size: 2.4rem;
+            font-weight: bold;
+            color: #f39c12;
+            font-family: monospace;
+        }
+
+        /* Footer / Teks Berjalan (Running Text) */
+        footer {
+            background-color: #06180c;
+            padding: 15px 0;
+            border-top: 2px solid #d4af37;
+            white-space: nowrap;
+            overflow: hidden;
+            box-sizing: border-box;
+        }
+        .marquee {
+            display: inline-block;
+            animation: marquee 25s linear infinite;
+            font-size: 1.4rem;
+            color: #f1c40f;
+            font-weight: 500;
+        }
+        @keyframes marquee {
+            0% { transform: translate(100%, 0); }
+            100% { transform: translate(-100%, 0); }
+        }
+    </style>
+</head>
 <body>
-<div class="card">
-  <h2>Halo Nafis!</h2>
-  <p>Jadilah anak sholeh yaa.....</p>
-  <button id="btn-click">Klik Saya!</button>
-  <p id="msg" class="hidden-msg"></p>
-</div>
-<script src="script.js"></script>
+
+    <!-- Header Masjid -->
+    <header>
+        <div class="masjid-info">
+            <h1>MASJID AL-IKHLAS</h1>
+            <p>Jl. Contoh No. 123, Kota Anda</p>
+        </div>
+        <div class="datetime-box">
+            <div id="clock">00:00:00</div>
+            <div id="date">Memuat tanggal...</div>
+        </div>
+    </header>
+
+    <!-- Konten Jadwal Sholat -->
+    <div class="main-content">
+        <div class="schedule-grid">
+            <div class="schedule-card">
+                <h3>Subuh</h3>
+                <div class="time">04:15</div>
+            </div>
+            <div class="schedule-card">
+                <h3>Dzuhur</h3>
+                <div class="time">11:45</div>
+            </div>
+            <div class="schedule-card">
+                <h3>Ashar</h3>
+                <div class="time">15:05</div>
+            </div>
+            <div class="schedule-card active"> <!-- Contoh status waktu aktif/sholat tiba -->
+                <h3>Maghrib</h3>
+                <div class="time">17:55</div>
+            </div>
+            <div class="schedule-card">
+                <h3>Isya</h3>
+                <div class="time">19:05</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Teks Berjalan Pengumuman -->
+    <footer>
+        <div class="marquee">
+            📢 Selamat datang di Masjid Al-Ikhlas | Mohon matikan atau silent ponsel selama berada di dalam area masjid | Kajian Rutin Ba'da Maghrib bersama Ustadz setempat | Saldo Kas Masjid per minggu ini: Rp 4.550.000,- Jazakumullah Khair
+        </div>
+    </footer>
+
+    <!-- Skrip JavaScript untuk Jam Real-time -->
+    <script>
+        function updateClock() {
+            const now = new Date();
+            
+            // Format Jam (HH:MM:SS)
+            let hours = String(now.getHours()).padStart(2, '0');
+            let minutes = String(now.getMinutes()).padStart(2, '0');
+            let seconds = String(now.getSeconds()).padStart(2, '0');
+            document.getElementById('clock').innerText = `${hours}:${minutes}:${seconds}`;
+
+            // Format Tanggal Masehi
+            const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
+            document.getElementById('date').innerText = now.toLocaleDateString('id-ID', options);
+        }
+
+        // Jalankan fungsi jam setiap 1 detik
+        setInterval(updateClock, 1000);
+        updateClock(); // Panggil langsung saat halaman dimuat
+    </script>
 </body>
+</html>
