@@ -18,8 +18,7 @@
             overflow: hidden;
             font-family: 'Plus Jakarta Sans', sans-serif;
         }
-        
-        /* BACKGROUND MASJID AL-JABBAR MALAM HARI */
+        /* BACKGROUND MASJID */
         body {
             background: url('https://images.unsplash.com/photo-1584551246679-0daf3d275d0f?w=1920&q=80') no-repeat center center fixed;
             background-size: cover;
@@ -44,7 +43,6 @@
             flex-direction: column;
             align-items: flex-end;
         }
-
         .mosque-title {
             font-family: 'Amiri', serif;
             font-size: 65px;
@@ -56,7 +54,6 @@
         .mosque-title span {
             color: #facc15;
         }
-
         .mosque-address {
             font-size: 13px;
             color: #e2e8f0;
@@ -64,7 +61,6 @@
             text-shadow: 1px 1px 4px rgba(0,0,0,0.8);
             letter-spacing: 0.3px;
         }
-
         .date-container {
             margin-top: 12px;
             background: rgba(15, 23, 42, 0.85);
@@ -77,7 +73,6 @@
             gap: 12px;
             box-shadow: 0 4px 20px rgba(0,0,0,0.5);
         }
-
         .date-dot {
             width: 8px;
             height: 8px;
@@ -85,38 +80,34 @@
             border-radius: 50%;
             box-shadow: 0 0 8px #22c55e;
         }
-
         .date-text {
             font-size: 15px;
             font-weight: 600;
             color: #ffffff;
             letter-spacing: 0.3px;
         }
-
         .date-divider {
             color: #64748b;
             font-weight: 400;
         }
-
         .hijri-text {
             font-family: 'Amiri', serif;
             font-size: 16px;
             color: #facc15;
         }
 
-        /* PANEL JADWAL SHOLAT VERTIKAL PENUH DI KIRI */
+        /* PANEL JADWAL SHOLAT VERTIKAL DI KIRI */
         .prayer-sidebar {
             position: absolute;
             top: 25px;
             left: 30px;
-            bottom: 25px;
+            bottom: 85px; /* Diberi jarak untuk running text di bawah */
             z-index: 10;
             display: flex;
             flex-direction: column;
             gap: 12px;
             width: 290px;
         }
-
         .prayer-card {
             flex-grow: 1;
             padding: 12px 20px;
@@ -128,35 +119,111 @@
             justify-content: center;
             border: 1px solid rgba(255, 255, 255, 0.2);
         }
-
         .prayer-name {
             font-size: 18px;
             font-weight: 700;
             color: #facc15;
             text-shadow: 1px 1px 3px rgba(0,0,0,0.8);
         }
-
         .prayer-time {
             font-size: 40px;
-            font-weight: 1000;
+            font-weight: 900;
             color: #ffffff;
             letter-spacing: 1px;
             text-shadow: 2px 2px 6px rgba(0,0,0,0.8);
             line-height: 1.1;
             margin-top: 2px;
         }
+        .bg-shubuh  { background: rgba(20, 35, 30, 0.78); }
+        .bg-syuruq  { background: rgba(20, 85, 100, 0.78); }
+        .bg-dzuhur  { background: rgba(70, 45, 80, 0.78); }
+        .bg-ashar   { background: rgba(180, 110, 20, 0.78); }
+        .bg-maghrib { background: rgba(160, 40, 40, 0.78); }
+        .bg-isya    { background: rgba(80, 30, 120, 0.78); }
 
-        .bg-shubuh { background: rgba(20, 35, 30, 0.78); }
-        .bg-syuruq { background: rgba(20, 85, 100, 0.78); }
-        .bg-dzuhur { background: rgba(70, 45, 80, 0.78); }
-        .bg-ashar  { background: rgba(180, 110, 20, 0.78); }
-        .bg-maghrib{ background: rgba(160, 40, 40, 0.78); }
-        .bg-isya   { background: rgba(80, 30, 120, 0.78); }
+        /* COUNTDOWN KANAN BAWAH (GAYA SESUAI CONTOH) */
+        .countdown-container {
+            position: absolute;
+            bottom: 80px;
+            right: 35px;
+            z-index: 10;
+            background: #ffffff;
+            border-radius: 9999px;
+            display: flex;
+            align-items: center;
+            box-shadow: 0 6px 25px rgba(0,0,0,0.5);
+            overflow: hidden;
+            border: 2px solid rgba(255, 255, 255, 0.8);
+        }
+        .countdown-icon-box {
+            background: #1d4ed8;
+            padding: 14px 22px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .countdown-icon-box svg {
+            width: 30px;
+            height: 30px;
+            fill: none;
+            stroke: #ffffff;
+            stroke-width: 2;
+            stroke-linecap: round;
+            stroke-linejoin: round;
+        }
+        .countdown-content {
+            display: flex;
+            align-items: center;
+            gap: 18px;
+            padding: 0 25px;
+        }
+        .countdown-label {
+            font-size: 24px;
+            font-weight: 800;
+            color: #1d4ed8;
+            letter-spacing: 0.5px;
+        }
+        .countdown-timer {
+            font-size: 32px;
+            font-weight: 900;
+            color: #1e293b;
+            letter-spacing: 1px;
+        }
+
+        /* RUNNING TEXT DI BAWAH */
+        .running-text-container {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 55px;
+            background: rgba(15, 23, 42, 0.9);
+            backdrop-filter: blur(8px);
+            z-index: 20;
+            display: flex;
+            align-items: center;
+            border-top: 1px solid rgba(255, 255, 255, 0.15);
+            overflow: hidden;
+        }
+        .running-text {
+            display: inline-block;
+            white-space: nowrap;
+            animation: marquee 25s linear infinite;
+            font-size: 18px;
+            font-weight: 700;
+            color: #facc15;
+            letter-spacing: 0.5px;
+            text-shadow: 1px 1px 3px rgba(0,0,0,0.8);
+        }
+        @keyframes marquee {
+            0%   { transform: translateX(100vw); }
+            100% { transform: translateX(-100%); }
+        }
     </style>
 </head>
 <body>
 
-    <!-- Panel Jadwal Sholat Vertikal Penuh -->
+    <!-- Panel Jadwal Sholat Vertikal di Kiri -->
     <div class="prayer-sidebar">
         <div class="prayer-card bg-shubuh">
             <div class="prayer-name">Shubuh</div>
@@ -190,7 +257,6 @@
             <h1 class="mosque-title"><span>Masjid</span> Al-Kautsar</h1>
             <p class="mosque-address">Komplek Puri Mega Citra, Ciheulang, Ciparay, Kab. Bandung.</p>
         </div>
-
         <div class="date-container">
             <div class="date-dot"></div>
             <div id="masehi-date" class="date-text">Memuat Tanggal...</div>
@@ -199,7 +265,28 @@
         </div>
     </div>
 
-    <!-- Script Tanggal & API Jadwal Sholat Kemenag RI (Kab. Bandung) -->
+    <!-- Hitung Mundur Waktu Sholat (Kanan Bawah) -->
+    <div class="countdown-container">
+        <div class="countdown-icon-box">
+            <svg viewBox="0 0 24 24">
+                <circle cx="12" cy="12" r="10"></circle>
+                <polyline points="12 6 12 12 16 14"></polyline>
+            </svg>
+        </div>
+        <div class="countdown-content">
+            <div id="next-prayer-name" class="countdown-label">MENUNGGU</div>
+            <div id="countdown-timer" class="countdown-timer">00:00:00</div>
+        </div>
+    </div>
+
+    <!-- Running Text di Paling Bawah -->
+    <div class="running-text-container">
+        <div class="running-text">
+            ⚠️ Rapatkan Shaf dan Luruskan Barisan &nbsp;&nbsp;&nbsp;&nbsp;&bull;&nbsp;&nbsp;&nbsp;&nbsp; Harap matikan atau silent alat komunikasi selama berada di dalam masjid &nbsp;&nbsp;&nbsp;&nbsp;&bull;&nbsp;&nbsp;&nbsp;&nbsp; Mari jaga kebersihan dan ketenangan bersama
+        </div>
+    </div>
+
+    <!-- Script Utama (Tanggal, API Jadwal Sholat, & Countdown) -->
     <script>
         function updateDate() {
             const now = new Date();
@@ -208,15 +295,15 @@
         }
         updateDate();
 
+        let prayerSchedules = [];
+
         async function fetchJadwalSholat() {
             const today = new Date().toISOString().split('T')[0];
             const idKabBandung = "1211"; // ID Kemenag Kabupaten Bandung
             const url = `https://api.myquran.com/v2/sholat/jadwal/${idKabBandung}/${today}`;
-
             try {
                 const response = await fetch(url);
                 const data = await response.json();
-                
                 if (data.status) {
                     const j = data.data.jadwal;
                     document.getElementById('time-shubuh').innerText = j.subuh;
@@ -225,16 +312,68 @@
                     document.getElementById('time-ashar').innerText = j.ashar;
                     document.getElementById('time-maghrib').innerText = j.maghrib;
                     document.getElementById('time-isya').innerText = j.isya;
-
                     if (j.date) {
                         document.getElementById('hijri-date').innerText = j.date;
                     }
+
+                    // Simpan jadwal untuk hitung mundur
+                    prayerSchedules = [
+                        { name: "SHUBUH", time: j.subuh },
+                        { name: "SYURUQ", time: j.terbit },
+                        { name: "DZUHUR", time: j.dzuhur },
+                        { name: "ASHAR", time: j.ashar },
+                        { name: "MAGHRIB", time: j.maghrib },
+                        { name: "ISYA", time: j.isya }
+                    ];
                 }
             } catch (error) {
                 console.error("Gagal mengambil jadwal sholat:", error);
             }
         }
         fetchJadwalSholat();
+
+        // Logika Hitung Mundur Waktu Sholat
+        function updateCountdown() {
+            if (prayerSchedules.length === 0) return;
+
+            const now = new Date();
+            let targetPrayer = null;
+            let targetTimeMs = null;
+
+            for (let prayer of prayerSchedules) {
+                const [hours, minutes] = prayer.time.split(':').map(Number);
+                const prayerDate = new Date();
+                prayerDate.setHours(hours, minutes, 0, 0);
+
+                if (now < prayerDate) {
+                    targetPrayer = prayer.name;
+                    targetTimeMs = prayerDate;
+                    break;
+                }
+            }
+
+            // Jika sudah lewat semua sholat hari ini, targetkan Shubuh besok
+            if (!targetPrayer) {
+                targetPrayer = "SHUBUH";
+                const [hours, minutes] = prayerSchedules[0].time.split(':').map(Number);
+                const prayerDate = new Date();
+                prayerDate.setDate(prayerDate.getDate() + 1);
+                prayerDate.setHours(hours, minutes, 0, 0);
+                targetTimeMs = prayerDate;
+            }
+
+            const diff = targetTimeMs - now;
+            if (diff > 0) {
+                const h = String(Math.floor((diff / (1000 * 60 * 60)) % 24)).padStart(2, '0');
+                const m = String(Math.floor((diff / (1000 * 60)) % 60)).padStart(2, '0');
+                const s = String(Math.floor((diff / 1000) % 60)).padStart(2, '0');
+
+                document.getElementById('next-prayer-name').innerText = targetPrayer;
+                document.getElementById('countdown-timer').innerText = `${h}:${m}:${s}`;
+            }
+        }
+
+        setInterval(updateCountdown, 1000);
     </script>
 </body>
 </html>
