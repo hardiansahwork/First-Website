@@ -4,6 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Masjid Al-Kautsar</title>
+    <!-- Google Fonts: Amiri untuk gaya klasik elegan -->
+    <link href="https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
     <style>
         * {
             margin: 0;
@@ -14,26 +16,128 @@
             width: 100%;
             height: 100%;
             overflow: hidden;
+            font-family: 'Plus Jakarta Sans', sans-serif;
         }
         
-        /* STEP 1: Mengatur Background Masjid Al-Jabbar Full Screen */
+        /* STEP 1: Background Masjid Al-Jabbar Full Screen */
         body {
             background: url('https://images.unsplash.com/photo-1591604129939-f1efa4d9f7fa?w=1920') no-repeat center center fixed;
             background-size: cover;
             position: relative;
         }
-
-        /* Memberikan sedikit lapisan gelap transparan agar nantinya teks lebih jelas dibaca */
         body::after {
             content: '';
             position: absolute;
             inset: 0;
-            background: rgba(0, 0, 0, 0.25);
+            background: rgba(0, 0, 0, 0.3);
             z-index: 1;
+        }
+
+        /* STEP 2: Identitas Masjid & Tanggal di Kanan Atas */
+        .header-right {
+            position: absolute;
+            top: 25px;
+            right: 35px;
+            z-index: 10;
+            text-align: right;
+            display: flex;
+            flex-direction: column;
+            align-items: flex-end;
+        }
+
+        /* Judul Nama Masjid */
+        .mosque-title {
+            font-family: 'Amiri', serif;
+            font-size: 44px;
+            font-weight: 700;
+            color: #ffffff;
+            text-shadow: 2px 2px 8px rgba(0,0,0,0.7);
+            line-height: 1.1;
+        }
+        .mosque-title span {
+            color: #facc15; /* Warna kuning emas untuk kata pertama */
+        }
+
+        /* Alamat Masjid */
+        .mosque-address {
+            font-size: 13px;
+            color: #e2e8f0;
+            margin-top: 4px;
+            text-shadow: 1px 1px 4px rgba(0,0,0,0.8);
+            letter-spacing: 0.3px;
+        }
+
+        /* Kotak Tanggal di Bawah Identitas */
+        .date-container {
+            margin-top: 12px;
+            background: rgba(15, 23, 42, 0.85);
+            backdrop-filter: blur(8px);
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            padding: 8px 20px;
+            border-radius: 9999px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.5);
+        }
+
+        .date-dot {
+            width: 8px;
+            height: 8px;
+            background-color: #22c55e;
+            border-radius: 50%;
+            box-shadow: 0 0 8px #22c55e;
+        }
+
+        .date-text {
+            font-size: 15px;
+            font-weight: 600;
+            color: #ffffff;
+            letter-spacing: 0.3px;
+        }
+
+        .date-divider {
+            color: #64748b;
+            font-weight: 400;
+        }
+
+        .hijri-text {
+            font-family: 'Amiri', serif;
+            font-size: 16px;
+            color: #facc15;
         }
     </style>
 </head>
 <body>
 
+    <!-- STEP 2: Bagian Kanan Atas (Identitas & Tanggal) -->
+    <div class="header-right">
+        <div>
+            <h1 class="mosque-title"><span>Masjid</span> Al-Kautsar</h1>
+            <p class="mosque-address">Komplek Puri Mega Citra, Ciheulang, Ciparay, Kab. Bandung.</p>
+        </div>
+
+        <div class="date-container">
+            <div class="date-dot"></div>
+            <div id="masehi-date" class="date-text">Memuat Tanggal...</div>
+            <div class="date-divider">|</div>
+            <div id="hijri-date" class="hijri-text">Memuat Hijriyah...</div>
+        </div>
+    </div>
+
+    <!-- Script untuk Tanggal Otomatis -->
+    <script>
+        function updateDate() {
+            const now = new Date();
+            
+            // Format Tanggal Masehi Indonesia
+            const options = { weekday: 'long', day: 'numeric', month: 'short', year: 'numeric' };
+            document.getElementById('masehi-date').innerText = now.toLocaleDateString('id-ID', options);
+
+            // Placeholder Tanggal Hijriyah (Nanti bisa disinkronkan otomatis dengan API)
+            document.getElementById('hijri-date').innerText = "25 Jumadil Akhir 1447 H";
+        }
+        updateDate();
+    </script>
 </body>
 </html>
