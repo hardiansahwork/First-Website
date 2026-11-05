@@ -11,48 +11,28 @@
     <style>
         body {
             font-family: 'Plus Jakarta Sans', sans-serif;
+            /* Background Animasi Gradasi Suasana Masjidil Haram / Mekah yang Elegan */
+            background: linear-gradient(-45deg, #022c22, #064e3b, #0f766e, #115e59);
+            background-size: 400% 400%;
+            animation: gradientBG 15s ease infinite;
             overflow: hidden;
         }
-        /* Styling untuk Video Background */
-        .bg-video {
-            position: fixed;
-            right: 0;
-            bottom: 0;
-            min-width: 100%;
-            min-height: 100%;
-            object-fit: cover;
-            z-index: -2;
-        }
-        /* Lapisan Gelap (Overlay) agar teks di atas video tetap terbaca jelas */
-        .video-overlay {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(rgba(2, 44, 34, 0.65), rgba(2, 30, 22, 0.75));
-            z-index: -1;
+        @keyframes gradientBG {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
         }
         .font-amiri {
             font-family: 'Amiri', serif;
         }
         .glass-card {
             background: rgba(0, 0, 0, 0.45);
-            backdrop-filter: blur(10px);
+            backdrop-filter: blur(12px);
             border: 1px solid rgba(255, 255, 255, 0.15);
         }
     </style>
 </head>
-<body class="text-white h-screen w-screen flex flex-col justify-between p-6 relative">
-
-    <!-- VIDEO BACKGROUND: Suasana Thawaf (Bergerak / Loop) -->
-    <video autoplay muted loop class="bg-video">
-        <source src="https://assets.mixkit.co/videos/preview/mixkit-kaaba-in-mecca-during-the-day-41555-large.mp4" type="video/mp4">
-        Browser Anda tidak mendukung pemutaran video.
-    </video>
-    
-    <!-- Lapisan Gelap Transparan -->
-    <div class="video-overlay"></div>
+<body class="text-white h-screen w-screen flex flex-col justify-between p-6">
 
     <!-- HEADER: Identitas Mesjid & Jam Utama -->
     <header class="flex justify-between items-center glass-card rounded-2xl px-8 py-4 shadow-2xl">
