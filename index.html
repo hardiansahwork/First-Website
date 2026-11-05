@@ -7,210 +7,236 @@
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700;900&display=swap" rel="stylesheet">
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Roboto', sans-serif; }
+        html, body { width: 100%; height: 100%; overflow: hidden; }
+
         body {
-            background: linear-gradient(rgba(0,0,0,0.45), rgba(0,0,0,0.45)),
+            background: linear-gradient(to right, rgba(0,0,0,0.5) 0%, rgba(0,0,0,0.2) 100%),
                         url('https://images.unsplash.com/photo-1542816417-0983c9c9ad53?w=1920') center/cover no-repeat;
-            width: 100vw; height: 100vh;
-            overflow: hidden;
-            color: white;
+            color: #fff;
         }
 
-        /* Judul Masjid */
-        .header-masjid {
+        /* ——— KANAN ATAS: NAMA & ALAMAT ——— */
+        .top-right {
             position: absolute;
-            top: 20px; right: 40px;
+            top: 24px; right: 32px;
             text-align: right;
         }
-        .nama-masjid {
-            font-size: 42px; font-weight: 900;
-            color: #ffd700;
-            text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+        .mosque-name {
+            font-size: 40px; font-weight: 900;
+            color: #ffd300;
+            text-shadow: 2px 2px 6px rgba(0,0,0,0.5);
+            letter-spacing: 0.5px;
         }
-        .alamat-masjid {
-            font-size: 16px; color: #eee; margin-top: 4px;
+        .mosque-address {
+            font-size: 15px; color: #eee; margin-top: 4px;
+        }
+        .mosque-icon {
+            position: absolute; top: 8px; right: 0;
+            font-size: 26px; color: #ffd300;
         }
 
-        /* Panel Jadwal Kiri */
-        .panel-jadwal {
+        /* ——— KIRI PANEL JADWAL ——— */
+        .schedule-panel {
             position: absolute;
-            top: 30px; left: 30px;
-            background: linear-gradient(135deg, rgba(25,45,90,0.9), rgba(15,30,65,0.85));
-            border-radius: 20px;
-            padding: 25px 20px;
-            width: 340px;
-            box-shadow: 0 8px 32px rgba(0,0,0,0.35);
-            border: 1px solid rgba(255,215,0,0.2);
+            top: 20px; left: 20px;
+            width: 320px;
+            background: linear-gradient(135deg, rgba(30,58,95,0.85), rgba(20,40,75,0.75));
+            border-radius: 16px;
+            padding: 24px 20px;
+            box-shadow: 0 8px 30px rgba(0,0,0,0.3);
+            border: 1px solid rgba(255,211,0,0.15);
         }
-        .baris-waktu {
+        .schedule-row {
             display: flex; align-items: center; justify-content: space-between;
-            padding: 14px 0; border-bottom: 1px solid rgba(255,255,255,0.1);
+            padding: 10px 0;
+            border-bottom: 1px solid rgba(255,255,255,0.08);
         }
-        .baris-waktu:last-child { border-bottom: none; }
-        .nama-waktu { display: flex; align-items: center; gap: 12px; font-size: 20px; font-weight: 700; }
-        .nama-waktu i { color: #ffd700; font-size: 22px; }
-        .nilai-waktu { font-size: 36px; font-weight: 900; color: #fff; }
-        .keterangan { font-size: 13px; color: #ccc; margin-top: 4px; }
+        .schedule-row:last-child { border-bottom: none; }
 
-        /* Jam Analog */
-        .wadah-jam {
-            position: absolute; top: 50%; left: 220px; transform: translate(-50%, -50%);
-            width: 220px; height: 220px;
-            background: radial-gradient(circle, #1a2a4a, #0f1a30);
+        .time-label {
+            display: flex; align-items: center; gap: 10px;
+            font-size: 20px; font-weight: 700;
+        }
+        .time-icon { font-size: 22px; color: #ffd300; width: 28px; text-align: center; }
+        .time-value {
+            font-size: 38px; font-weight: 900;
+            color: #fff;
+            letter-spacing: 1px;
+        }
+        .sub-note {
+            font-size: 12px; color: #ccc; margin-top: 2px; padding-left: 38px;
+        }
+
+        /* ——— JAM ANALOG ——— */
+        .clock-container {
+            position: absolute;
+            top: 50%; left: 210px; transform: translate(-50%, -50%);
+            width: 210px; height: 210px;
+            background: radial-gradient(circle, #1e3254, #122038);
             border-radius: 50%;
-            border: 4px solid #ffd700;
-            box-shadow: 0 0 20px rgba(255,215,0,0.3), inset 0 0 20px rgba(0,0,0,0.5);
+            border: 4px solid #ffd300;
+            box-shadow: 0 0 20px rgba(255,211,0,0.25), inset 0 0 25px rgba(0,0,0,0.4);
         }
-        .jam-titik {
-            position: absolute; width: 100%; height: 100%;
+        .clock-face {
+            position: relative; width: 100%; height: 100%;
         }
-        .angka-jam {
-            position: absolute; font-size: 16px; font-weight: 700; color: #fff;
+        .clock-num {
+            position: absolute; font-size: 15px; font-weight: 700; color: #fff;
         }
-        .angka-12 { top: 10px; left: 50%; transform: translateX(-50%); }
-        .angka-3 { right: 10px; top: 50%; transform: translateY(-50%); }
-        .angka-6 { bottom: 10px; left: 50%; transform: translateX(-50%); }
-        .angka-9 { left: 10px; top: 50%; transform: translateY(-50%); }
-        .jarum {
+        .n12 { top: 12px; left: 50%; transform: translateX(-50%); }
+        .n3  { right: 12px; top: 50%; transform: translateY(-50%); }
+        .n6  { bottom: 12px; left: 50%; transform: translateX(-50%); }
+        .n9  { left: 12px; top: 50%; transform: translateY(-50%); }
+
+        .hand {
             position: absolute; bottom: 50%; left: 50%;
             transform-origin: bottom center;
-            background: #fff; border-radius: 4px;
+            border-radius: 3px;
         }
-        .jarum-jam { width: 6px; height: 60px; margin-left: -3px; background: #ffd700; }
-        .jarum-menit { width: 4px; height: 85px; margin-left: -2px; background: #fff; }
-        .titik-tengah {
+        .hour-hand {
+            width: 6px; height: 58px; margin-left: -3px;
+            background: #ffd300;
+        }
+        .minute-hand {
+            width: 4px; height: 82px; margin-left: -2px;
+            background: #fff;
+        }
+        .center-dot {
             position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);
-            width: 12px; height: 12px; background: #ffd700; border-radius: 50%; z-index: 10;
+            width: 12px; height: 12px; background: #ffd300; border-radius: 50%; z-index: 10;
         }
-        .label-masaajid {
-            position: absolute; bottom: 25px; left: 50%; transform: translateX(-50%);
-            font-size: 11px; color: #aaa; text-align: center;
+        .clock-label {
+            position: absolute; bottom: 22px; left: 50%; transform: translateX(-50%);
+            font-size: 10px; color: #bbb; text-align: center; line-height: 1.2;
         }
 
-        /* Baris Bawah Informasi */
-        .baris-bawah {
+        /* ——— BARIS BAWAH PENUH LEBAR ——— */
+        .bottom-bar {
             position: absolute; bottom: 0; left: 0; right: 0;
-            background: rgba(0,20,60,0.85);
-            padding: 12px 30px;
+            background: rgba(0,25,60,0.8);
+            padding: 10px 24px;
             display: flex; justify-content: space-between; align-items: center;
-            border-top: 2px solid #ffd700;
-            font-size: 16px;
+            border-top: 2px solid #ffd300;
+            font-size: 15px;
         }
-        .kiri-bawah { display: flex; align-items: center; gap: 12px; }
-        .titik-hijau {
+        .bottom-left { display: flex; align-items: center; gap: 10px; }
+        .green-dot {
             width: 10px; height: 10px; background: #0f0; border-radius: 50%;
-            display: inline-block; margin-right: 8px;
+            display: inline-block;
         }
-        .kanan-bawah {
-            background: rgba(30,60,120,0.8);
-            padding: 8px 20px; border-radius: 8px;
-            border: 1px solid rgba(255,255,255,0.2);
-            font-weight: 700; font-size: 18px;
+        .bottom-right {
+            background: rgba(30,60,120,0.7);
+            padding: 6px 18px; border-radius: 6px;
+            border: 1px solid rgba(255,255,255,0.15);
+            font-weight: 700; font-size: 17px;
         }
     </style>
 </head>
 <body>
 
-    <!-- Judul Masjid -->
-    <div class="header-masjid">
-        <div class="nama-masjid">Masjid Al-Kautsar</div>
-        <div class="alamat-masjid">Komplek Puri Mega Citra, Ciheulang, Ciparay, Kab. Bandung<br>Tel: 08xx-xxxx-xxxx</div>
+    <!-- Kanan Atas -->
+    <div class="top-right">
+        <span class="mosque-icon">☪</span>
+        <div class="mosque-name">Masjid Al-Kautsar</div>
+        <div class="mosque-address">
+            Komplek Puri Mega Citra, Ciheulang, Ciparay, Kab. Bandung<br>
+            Telp. 08xx-xxxx-xxxx
+        </div>
     </div>
 
-    <!-- Panel Jadwal Sholat Kiri -->
-    <div class="panel-jadwal">
-        <div class="baris-waktu">
+    <!-- Panel Jadwal Kiri -->
+    <div class="schedule-panel">
+        <div class="schedule-row">
             <div>
-                <div class="nama-waktu"><span>☀️</span> Shubuh</div>
-                <div class="keterangan">IQAMAH 04:48</div>
+                <div class="time-label"><span class="time-icon">☀️</span> Shubuh</div>
+                <div class="sub-note">IQAMAH 04:48</div>
             </div>
-            <div class="nilai-waktu" id="waktu-shubuh">04:38</div>
+            <div class="time-value">04:38</div>
         </div>
-        <div class="baris-waktu">
+        <div class="schedule-row">
             <div>
-                <div class="nama-waktu"><span>☀️</span> Syuruq</div>
-                <div class="keterangan">05:53 - 06:08</div>
+                <div class="time-label"><span class="time-icon">☀️</span> Syuruq</div>
+                <div class="sub-note">05:53 - 06:08</div>
             </div>
-            <div class="nilai-waktu" id="waktu-syuruq">05:53</div>
+            <div class="time-value">05:53</div>
         </div>
-        <div class="baris-waktu">
+        <div class="schedule-row">
             <div>
-                <div class="nama-waktu"><span>☀️</span> Dzuhur</div>
-                <div class="keterangan">IQAMAH 12:20</div>
+                <div class="time-label"><span class="time-icon">☀️</span> Dzuhur</div>
+                <div class="sub-note">IQAMAH 12:20</div>
             </div>
-            <div class="nilai-waktu" id="waktu-dzuhur">12:10</div>
+            <div class="time-value">12:10</div>
         </div>
-        <div class="baris-waktu">
+        <div class="schedule-row">
             <div>
-                <div class="nama-waktu"><span>☀️</span> Ashar</div>
-                <div class="keterangan">IQAMAH 15:37</div>
+                <div class="time-label"><span class="time-icon">☀️</span> Ashar</div>
+                <div class="sub-note">IQAMAH 15:37</div>
             </div>
-            <div class="nilai-waktu" id="waktu-ashar">15:27</div>
+            <div class="time-value">15:27</div>
         </div>
-        <div class="baris-waktu">
+        <div class="schedule-row">
             <div>
-                <div class="nama-waktu"><span>🌤️</span> Maghrib</div>
-                <div class="keterangan">IQAMAH 18:31</div>
+                <div class="time-label"><span class="time-icon">⛅</span> Maghrib</div>
+                <div class="sub-note">IQAMAH 18:31</div>
             </div>
-            <div class="nilai-waktu" id="waktu-maghrib">18:21</div>
+            <div class="time-value">18:21</div>
         </div>
-        <div class="baris-waktu">
+        <div class="schedule-row">
             <div>
-                <div class="nama-waktu"><span>🌙</span> Isya</div>
-                <div class="keterangan">IQAMAH 19:42</div>
+                <div class="time-label"><span class="time-icon">🌙</span> Isya</div>
+                <div class="sub-note">IQAMAH 19:42</div>
             </div>
-            <div class="nilai-waktu" id="waktu-isya">19:32</div>
+            <div class="time-value">19:32</div>
         </div>
     </div>
 
     <!-- Jam Analog -->
-    <div class="wadah-jam">
-        <div class="jam-titik angka-12">12</div>
-        <div class="jam-titik angka-3">3</div>
-        <div class="jam-titik angka-6">6</div>
-        <div class="jam-titik angka-9">9</div>
-        <div class="jarum jarum-jam" id="jarum-jam"></div>
-        <div class="jarum jarum-menit" id="jarum-menit"></div>
-        <div class="titik-tengah"></div>
-        <div class="label-masaajid">MASJID<br>v2.81</div>
+    <div class="clock-container">
+        <div class="clock-face">
+            <div class="clock-num n12">12</div>
+            <div class="clock-num n3">3</div>
+            <div class="clock-num n6">6</div>
+            <div class="clock-num n9">9</div>
+            <div class="hand hour-hand" id="hourHand"></div>
+            <div class="hand minute-hand" id="minuteHand"></div>
+            <div class="center-dot"></div>
+            <div class="clock-label">MASAJID<br>v2.81</div>
+        </div>
     </div>
 
-    <!-- Baris Bawah Informasi -->
-    <div class="baris-bawah">
-        <div class="kiri-bawah">
-            <span class="titik-hijau"></span>
-            <span id="tanggal-hijriah">Jumat 6 Syaban 1447 H</span>
+    <!-- Baris Bawah -->
+    <div class="bottom-bar">
+        <div class="bottom-left">
+            <span class="green-dot"></span>
+            <span id="hijriDate">Kamis 19 Syawal 1447 H</span>
             &nbsp;|&nbsp;
-            <span>Area Masjid — Total Infak Bulan Ini: Rp 0,-</span>
+            <span>Area Masjid &bull; Total infak bulan ini: Rp 0,-</span>
         </div>
-        <div class="kanan-bawah" id="jam-digital">Jumat 03:49:11</div>
+        <div class="bottom-right" id="digitalClock">Kamis 09:25:00</div>
     </div>
 
 <script>
-    // Update Jam Digital & Analog
-    function updateJam() {
+    function updateClock() {
         const now = new Date();
-        const j = now.getHours();
+        const h = now.getHours();
         const m = now.getMinutes();
-        const d = now.getSeconds();
+        const s = now.getSeconds();
+
+        const days = ['Minggu','Senin','Selasa','Rabu','Kamis','Jumat','Sabtu'];
+        const dayName = days[now.getDay()];
 
         // Jam digital kanan bawah
-        const hari = ['Minggu','Senin','Selasa','Rabu','Kamis','Jumat','Sabtu'][now.getDay()];
-        document.getElementById('jam-digital').textContent = 
-            `${hari} ${String(j).padStart(2,'0')}:${String(m).padStart(2,'0')}:${String(d).padStart(2,'0')}`;
+        document.getElementById('digitalClock').textContent =
+            `${dayName} ${String(h).padStart(2,'0')}:${String(m).padStart(2,'0')}:${String(s).padStart(2,'0')}`;
 
-        // Sudut jarum
-        const derajatMenit = (m * 6) + (d * 0.1);
-        const derajatJam = (j % 12) * 30 + m * 0.5;
-        document.getElementById('jarum-menit').style.transform = `rotate(${derajatMenit}deg)`;
-        document.getElementById('jarum-jam').style.transform = `rotate(${derajatJam}deg)`;
+        // Sudut jarum jam
+        const minuteDeg = m * 6 + s * 0.1;
+        const hourDeg = (h % 12) * 30 + m * 0.5;
+        document.getElementById('minuteHand').style.transform = `rotate(${minuteDeg}deg)`;
+        document.getElementById('hourHand').style.transform = `rotate(${hourDeg}deg)`;
     }
-    setInterval(updateJam, 1000);
-    updateJam();
-
-    // === CATATAN ===
-    // Ubah waktu di bagian nilai-waktu di atas sesuai jadwal sholat aktual
-    // Ubah tanggal Hijriah di 'tanggal-hijriah' sesuai tanggal saat ini
-    // Ganti URL gambar latar di body dengan foto asli Masjid Al-Kautsar
+    setInterval(updateClock, 1000);
+    updateClock();
 </script>
 </body>
 </html>
