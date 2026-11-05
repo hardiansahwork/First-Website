@@ -1,333 +1,223 @@
 <!DOCTYPE html>
 <html lang="id">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Masjid Al-Kautsar — Puri Mega Citra</title>
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700;900&display=swap" rel="stylesheet">
-    <style>
-        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Roboto', sans-serif; }
-        html, body { width: 100%; height: 100%; overflow: hidden; }
-        
-        /* Background Foto Masjid Al-Jabbar yang Cerah & Megah */
-        body {
-            background: url('https://images.unsplash.com/photo-1591604129939-f1efa4d9f7fa?w=1920') center/cover no-repeat;
-            position: relative;
-        }
-        body::before {
-            content: '';
-            position: absolute;
-            inset: 0;
-            background: linear-gradient(to right, rgba(5,20,40,0.25), rgba(0,0,0,0.1));
-            z-index: 0;
-        }
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Masjid Al-Kautsar — Display Jadwal</title>
+<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700;900&display=swap" rel="stylesheet">
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Roboto', sans-serif; }
+html, body { width: 100%; height: 100%; overflow: hidden; background: #000; }
 
-        .wrapper {
-            position: relative;
-            z-index: 1;
-            width: 100%;
-            height: 100%;
-            display: flex;
-            flex-direction: column;
-            justify-content: space-between;
-            padding: 12px;
-        }
+/* ——— LAYAR UTAMA ——— */
+.screen {
+  position: relative; width: 100%; height: 100%;
+  background: linear-gradient(to right, #0b1a33 0%, #1a355c 45%, #2a4a78 100%);
+  color: #fff;
+}
 
-        /* LAYOUT UTAMA: PANEL KIRI & AREA KANAN */
-        .main-content {
-            display: flex;
-            gap: 15px;
-            align-items: flex-start;
-        }
+/* ——— LATAR BELAKANG FOTO ——— */
+.bg-image {
+  position: absolute; top: 0; right: 0; width: 65%; height: 100%;
+  background: url('https://images.unsplash.com/photo-1542816417-0983c9c9ad53?w=1600') center/cover no-repeat;
+  opacity: 0.9;
+}
+.overlay-dark {
+  position: absolute; top: 0; right: 0; width: 65%; height: 100%;
+  background: linear-gradient(to right, rgba(0,0,0,0.3), transparent 30%, transparent 70%, rgba(0,0,0,0.2));
+}
 
-        /* === PANEL JADWAL SHOLAT DI KIRI === */
-        .schedule-panel {
-            width: 380px;
-            background: rgba(12, 22, 38, 0.92);
-            border-top-left-radius: 14px;
-            border-bottom-left-radius: 14px;
-            border-top-right-radius: 80px;
-            border-bottom-right-radius: 80px;
-            padding: 8px 18px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
-            border-right: 3px solid rgba(255, 211, 0, 0.6);
-            display: flex;
-            flex-direction: column;
-            gap: 6px;
-        }
+/* ——— PANEL KIRI JADWAL ——— */
+.schedule-panel {
+  position: absolute; top: 0; left: 0; width: 42%; height: 100%;
+  z-index: 2;
+}
 
-        .s-row {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 6px 0;
-            border-bottom: 1px solid rgba(255,255,255,0.12);
-        }
-        .s-row:last-child { border-bottom: none; }
+/* Bentuk lengkung kanan atas */
+.curve-top {
+  position: absolute; top: 0; right: -60px; width: 120px; height: 140px;
+  background: #0b1a33; border-radius: 0 0 0 100%;
+  z-index: 3;
+}
 
-        .s-left { display: flex; flex-direction: column; }
-        .s-name {
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            font-size: 22px;
-            font-weight: 700;
-            color: #fff;
-        }
-        .s-icon { font-size: 20px; color: #ffd300; }
-        .s-note { font-size: 12px; color: #e2e8f0; padding-left: 28px; font-weight: 500; }
-        .s-val { font-size: 38px; font-weight: 900; color: #fff; letter-spacing: 0.5px; line-height: 1; }
+.s-row {
+  display: flex; justify-content: space-between; align-items: center;
+  padding: 14px 24px;
+  font-weight: 900;
+  clip-path: polygon(0 0, 100% 0, 94% 100%, 0 100%);
+  margin-bottom: 4px;
+}
+.s-name { font-size: 24px; }
+.s-time { font-size: 36px; letter-spacing: 2px; }
 
-        /* Warna Baris Kotak Jadwal Sesuai Referensi */
-        .row-shubuh { background: rgba(180, 40, 40, 0.80); margin: 0 -18px; padding: 6px 18px; border-top-left-radius: 10px; }
-        .row-terbit  { background: rgba(140, 30, 60, 0.80); margin: 0 -18px; padding: 6px 18px; }
-        .row-jumat   { background: rgba(30, 130, 70, 0.80); margin: 0 -18px; padding: 6px 18px; }
-        .row-ashar   { background: rgba(20, 100, 50, 0.80); margin: 0 -18px; padding: 6px 18px; }
-        .row-maghrib { background: rgba(50, 50, 60, 0.88); margin: 0 -18px; padding: 6px 18px; }
-        .row-isya    { background: rgba(70, 30, 90, 0.88); margin: 0 -18px; padding: 6px 18px; border-bottom-left-radius: 10px; }
+/* Warna masing-masing baris */
+.shubuh    { background: #2b1a0a; color: #ffd700; }
+.terbit    { background: #991a2e; color: #fff; }
+.jumat     { background: #006633; color: #fff; }
+.ashar     { background: #2e7d32; color: #fff; }
+.maghrib   { background: #424242; color: #fff; }
+.isya      { background: #4a148c; color: #fff; }
 
-        /* === JAM ANALOG DI SAMPING PANEL JADWAL === */
-        .clock-wrap {
-            width: 190px;
-            height: 190px;
-            background: radial-gradient(circle, #8b1e24, #4a0d11);
-            border-radius: 50%;
-            border: 5px solid #ffd300;
-            box-shadow: 0 0 25px rgba(0,0,0,0.6);
-            position: relative;
-            margin-top: 20px;
-        }
-        .clock-face { position: relative; width: 100%; height: 100%; }
-        .c-num { position: absolute; font-size: 15px; font-weight: 700; color: #fff; }
-        .c12 { top: 10px; left: 50%; transform: translateX(-50%); }
-        .c3  { right: 12px; top: 50%; transform: translateY(-50%); }
-        .c6  { bottom: 10px; left: 50%; transform: translateX(-50%); }
-        .c9  { left: 12px; top: 50%; transform: translateY(-50%); }
+/* ——— JAM BULAT TENGAH ——— */
+.clock-wrap {
+  position: absolute; top: 50%; left: 42%; transform: translate(-50%, -50%);
+  width: 220px; height: 220px;
+  background: radial-gradient(circle, #cc2222, #8b0000);
+  border-radius: 50%;
+  border: 6px solid #fff;
+  box-shadow: 0 0 20px rgba(0,0,0,0.4);
+  z-index: 10;
+}
+.clock-face { position: relative; width: 100%; height: 100%; }
+.c-num {
+  position: absolute; font-size: 20px; font-weight: 900; color: #fff;
+}
+.c12 { top: 14px; left: 50%; transform: translateX(-50%); }
+.c3  { right: 14px; top: 50%; transform: translateY(-50%); }
+.c6  { bottom: 14px; left: 50%; transform: translateX(-50%); }
+.c9  { left: 14px; top: 50%; transform: translateY(-50%); }
 
-        .hand {
-            position: absolute;
-            bottom: 50%;
-            left: 50%;
-            transform-origin: bottom center;
-            border-radius: 4px;
-        }
-        .h-hand { width: 5px; height: 48px; margin-left: -2.5px; background: #fff; }
-        .m-hand { width: 3px; height: 70px; margin-left: -1.5px; background: #ffd300; }
-        .s-hand { width: 2px; height: 78px; margin-left: -1px; background: #ff3333; }
-        .c-dot {
-            position: absolute;
-            top: 50%; left: 50%;
-            transform: translate(-50%, -50%);
-            width: 11px; height: 11px;
-            background: #ffd300;
-            border-radius: 50%;
-        }
+.hand {
+  position: absolute; bottom: 50%; left: 50%;
+  transform-origin: bottom center;
+  border-radius: 4px;
+}
+.h-hand { width: 8px; height: 65px; margin-left: -4px; background: #fff; }
+.m-hand { width: 5px; height: 90px; margin-left: -2.5px; background: #fff; }
+.s-hand { width: 2px; height: 95px; margin-left: -1px; background: #ffd700; }
+.c-center {
+  position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);
+  width: 14px; height: 14px; background: #ffd700; border-radius: 50%; z-index: 10;
+}
 
-        /* === KANAN ATAS: NAMA MASJID & TANGGAL === */
-        .mosque-top {
-            position: absolute;
-            top: 12px;
-            right: 20px;
-            text-align: right;
-        }
-        .m-name {
-            font-size: 38px;
-            font-weight: 900;
-            color: #ffd300;
-            text-shadow: 2px 2px 8px rgba(0,0,0,0.8);
-        }
-        .m-addr {
-            font-size: 13px;
-            color: #f1f1f1;
-            margin-top: 1px;
-            text-shadow: 1px 1px 4px rgba(0,0,0,0.7);
-        }
-        .m-icon {
-            position: absolute;
-            top: 2px;
-            right: 0;
-            font-size: 24px;
-            color: #ffd300;
-        }
+/* ——— KANAN ATAS: NAMA MASJID & TANGGAL ——— */
+.top-right {
+  position: absolute; top: 16px; right: 24px; text-align: right; z-index: 5;
+}
+.mosque-name {
+  font-size: 32px; font-weight: 900; color: #ffd700;
+  text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+}
+.mosque-address {
+  font-size: 14px; color: #eee; margin-top: 2px;
+}
+.date-line {
+  font-size: 18px; color: #fff; margin-top: 8px;
+  background: rgba(0,0,0,0.4);
+  display: inline-block; padding: 4px 16px; border-radius: 4px;
+}
 
-        .date-box {
-            position: absolute;
-            top: 72px;
-            right: 20px;
-            background: rgba(10, 25, 50, 0.85);
-            padding: 6px 16px;
-            border-radius: 6px;
-            border: 1px solid rgba(255,255,255,0.2);
-            font-size: 15px;
-            font-weight: 700;
-            color: #fff;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.4);
-        }
-
-        /* === BARIS BAWAH: RUNNING TEXT === */
-        .bottom-bar {
-            width: 100%;
-            background: rgba(0, 15, 45, 0.92);
-            padding: 10px 20px;
-            display: flex;
-            align-items: center;
-            border-top: 2px solid #ffd300;
-            font-size: 17px;
-            color: #fff;
-            box-shadow: 0 -5px 20px rgba(0,0,0,0.5);
-            border-radius: 8px;
-        }
-    </style>
+/* ——— TEKS BERJALAN BAWAH ——— */
+.marquee-bar {
+  position: absolute; bottom: 0; left: 0; right: 0;
+  background: rgba(0,0,0,0.7);
+  padding: 10px 0;
+  overflow: hidden;
+  border-top: 2px solid #ffd700;
+}
+.marquee-text {
+  white-space: nowrap;
+  font-size: 22px; font-weight: 700; color: #fff;
+  animation: scroll 25s linear infinite;
+}
+@keyframes scroll {
+  0% { transform: translateX(100%); }
+  100% { transform: translateX(-100%); }
+}
+</style>
 </head>
 <body>
 
-    <div class="wrapper">
-        <!-- Bagian Atas & Tengah (Panel Kiri & Jam Samping) -->
-        <div class="main-content">
-            <!-- Panel Jadwal Kiri dengan Ukuran Angka Besar -->
-            <div class="schedule-panel">
-                <div class="s-row row-shubuh">
-                    <div class="s-left">
-                        <div class="s-name"><span class="s-icon">☀️</span> Shubuh</div>
-                        <div class="s-note">IQAMAH <span id="iqamah-subuh">--:--</span></div>
-                    </div>
-                    <div id="time-subuh" class="s-val">--:--</div>
-                </div>
-                
-                <div class="s-row row-terbit">
-                    <div class="s-left">
-                        <div class="s-name"><span class="s-icon">🌅</span> Terbit</div>
-                        <div class="s-note">Terbit Matahari</div>
-                    </div>
-                    <div id="time-terbit" class="s-val">--:--</div>
-                </div>
+<div class="screen">
 
-                <div class="s-row row-jumat">
-                    <div class="s-left">
-                        <div class="s-name"><span class="s-icon">☀️</span> Dzuhur</div>
-                        <div class="s-note">IQAMAH <span id="iqamah-dzuhur">--:--</span></div>
-                    </div>
-                    <div id="time-dzuhur" class="s-val">--:--</div>
-                </div>
+  <!-- Latar Belakang Foto -->
+  <div class="bg-image"></div>
+  <div class="overlay-dark"></div>
 
-                <div class="s-row row-ashar">
-                    <div class="s-left">
-                        <div class="s-name"><span class="s-icon">⛅</span> Ashar</div>
-                        <div class="s-note">IQAMAH <span id="iqamah-ashar">--:--</span></div>
-                    </div>
-                    <div id="time-ashar" class="s-val">--:--</div>
-                </div>
+  <!-- Panel Jadwal Kiri -->
+  <div class="schedule-panel">
+    <div class="curve-top"></div>
 
-                <div class="s-row row-maghrib">
-                    <div class="s-left">
-                        <div class="s-name"><span class="s-icon">🌇</span> Maghrib</div>
-                        <div class="s-note">IQAMAH <span id="iqamah-maghrib">--:--</span></div>
-                    </div>
-                    <div id="time-maghrib" class="s-val">--:--</div>
-                </div>
-
-                <div class="s-row row-isya">
-                    <div class="s-left">
-                        <div class="s-name"><span class="s-icon">🌙</span> Isya</div>
-                        <div class="s-note">IQAMAH <span id="iqamah-isya">--:--</span></div>
-                    </div>
-                    <div id="time-isya" class="s-val">--:--</div>
-                </div>
-            </div>
-
-            <!-- Jam Analog Rapi di Samping Kiri (Di luar Panel Jadwal) -->
-            <div class="clock-wrap">
-                <div class="clock-face">
-                    <div class="c-num c12">12</div>
-                    <div class="c-num c3">3</div>
-                    <div class="c-num c6">6</div>
-                    <div class="c-num c9">9</div>
-                    <div class="hand h-hand" id="hHand"></div>
-                    <div class="hand m-hand" id="mHand"></div>
-                    <div class="hand s-hand" id="sHand"></div>
-                    <div class="c-dot"></div>
-                </div>
-            </div>
-        </div>
-
-        <!-- Identitas Masjid Kanan Atas -->
-        <div class="mosque-top">
-            <span class="m-icon">☪</span>
-            <div class="m-name">Masjid Al-Kautsar</div>
-            <div class="m-addr">Komplek Puri Mega Citra, Ciheulang, Ciparay, Kab. Bandung</div>
-        </div>
-
-        <!-- Kotak Tanggal -->
-        <div class="date-box" id="header-date">
-            Memuat Tanggal...
-        </div>
-
-        <!-- Baris Bawah Running Text -->
-        <div class="bottom-bar">
-            <marquee scrollamount="5">
-                ✨ Selamat datang di Masjid Al-Kautsar. Harap mematikan atau mengheningkan telepon genggam selama berada di dalam ruang utama masjid. • Mari jaga kebersihan dan ketertiban bersama.
-            </marquee>
-        </div>
+    <div class="s-row shubuh">
+      <span class="s-name">Shubuh</span>
+      <span class="s-time">04:23</span>
     </div>
+    <div class="s-row terbit">
+      <span class="s-name">Terbit</span>
+      <span class="s-time">05:38</span>
+    </div>
+    <div class="s-row jumat">
+      <span class="s-name">Jumat</span>
+      <span class="s-time">11:56</span>
+    </div>
+    <div class="s-row ashar">
+      <span class="s-name">Ashar</span>
+      <span class="s-time">15:10</span>
+    </div>
+    <div class="s-row maghrib">
+      <span class="s-name">Maghrib</span>
+      <span class="s-time">18:07</span>
+    </div>
+    <div class="s-row isya">
+      <span class="s-name">Isya</span>
+      <span class="s-time">19:19</span>
+    </div>
+  </div>
 
-    <!-- Script Jam & API Jadwal Sholat Kemenag RI Kab. Bandung -->
-    <script>
-        function updateClock() {
-            const n = new Date();
-            const h = n.getHours(), m = n.getMinutes(), s = n.getSeconds();
-            
-            const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
-            document.getElementById('header-date').innerText = n.toLocaleDateString('id-ID', options);
+  <!-- Jam Analog Tengah -->
+  <div class="clock-wrap">
+    <div class="clock-face">
+      <div class="c-num c12">12</div>
+      <div class="c-num c3">3</div>
+      <div class="c-num c6">6</div>
+      <div class="c-num c9">9</div>
+      <div class="hand h-hand" id="hHand"></div>
+      <div class="hand m-hand" id="mHand"></div>
+      <div class="hand s-hand" id="sHand"></div>
+      <div class="c-center"></div>
+    </div>
+  </div>
 
-            const sDeg = s * 6;
-            const mDeg = m * 6 + s * 0.1;
-            const hDeg = (h % 12) * 30 + m * 0.5;
+  <!-- Kanan Atas: Nama & Tanggal -->
+  <div class="top-right">
+    <div class="mosque-name">Masjid Al-Kautsar</div>
+    <div class="mosque-address">
+      Komplek Puri Mega Citra, Ciheulang, Ciparay, Kab. Bandung
+    </div>
+    <div class="date-line" id="dateLine">
+      Jumat / 10 Februari 2023 M — 19 Rajab 1444 H
+    </div>
+  </div>
 
-            document.getElementById('sHand').style.transform = `rotate(${sDeg}deg)`;
-            document.getElementById('mHand').style.transform = `rotate(${mDeg}deg)`;
-            document.getElementById('hHand').style.transform = `rotate(${hDeg}deg)`;
-        }
-        setInterval(updateClock, 1000);
-        updateClock();
+  <!-- Teks Berjalan Bawah -->
+  <div class="marquee-bar">
+    <div class="marquee-text">
+      🕌 Menuntut ilmu wajib bagi setiap muslim &bull; Mari belajar Al-Qur'an & mengajarkannya &bull; Silakan ikut kegiatan pengajian rutin masjid &bull; Terima kasih atas infak dan dukungan Anda &bull; ***
+    </div>
+  </div>
 
-        function tambahMenit(jamStr, menitTambahan) {
-            if (!jamStr || !jamStr.includes(':')) return '--:--';
-            let [jam, menit] = jamStr.split(':').map(Number);
-            let totalMenit = jam * 60 + menit + menitTambahan;
-            let h = Math.floor(totalMenit / 60) % 24;
-            let m = totalMenit % 60;
-            return String(h).padStart(2, '0') + ':' + String(m).padStart(2, '0');
-        }
+</div>
 
-        async function fetchJadwalSholat() {
-            const today = new Date().toISOString().split('T')[0];
-            const url = `https://api.myquran.com/v2/sholat/jadwal/1211/${today}`;
+<script>
+// === JAM BERJALAN ===
+function updateClock() {
+  const now = new Date();
+  const h = now.getHours();
+  const m = now.getMinutes();
+  const s = now.getSeconds();
 
-            try {
-                const response = await fetch(url);
-                const data = await response.json();
-                
-                if (data.status) {
-                    const j = data.data.jadwal;
-                    
-                    document.getElementById('time-subuh').innerText = j.subuh;
-                    document.getElementById('time-terbit').innerText = j.terbit;
-                    document.getElementById('time-dzuhur').innerText = j.dzuhur;
-                    document.getElementById('time-ashar').innerText = j.ashar;
-                    document.getElementById('time-maghrib').innerText = j.maghrib;
-                    document.getElementById('time-isya').innerText = j.isya;
+  // Sudut jarum
+  const secDeg = s * 6;
+  const minDeg = m * 6 + s * 0.1;
+  const houDeg = (h % 12) * 30 + m * 0.5;
 
-                    document.getElementById('iqamah-subuh').innerText = tambahMenit(j.subuh, 10);
-                    document.getElementById('iqamah-dzuhur').innerText = tambahMenit(j.dzuhur, 10);
-                    document.getElementById('iqamah-ashar').innerText = tambahMenit(j.ashar, 10);
-                    document.getElementById('iqamah-maghrib').innerText = tambahMenit(j.maghrib, 10);
-                    document.getElementById('iqamah-isya').innerText = tambahMenit(j.isya, 10);
-                }
-            } catch (error) {
-                console.error("Gagal memuat jadwal sholat:", error);
-            }
-        }
-        fetchJadwalSholat();
-    </script>
+  document.getElementById('sHand').style.transform = `rotate(${secDeg}deg)`;
+  document.getElementById('mHand').style.transform = `rotate(${minDeg}deg)`;
+  document.getElementById('hHand').style.transform = `rotate(${houDeg}deg)`;
+}
+setInterval(updateClock, 1000);
+updateClock();
+</script>
+
 </body>
 </html>
