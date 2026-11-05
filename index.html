@@ -11,10 +11,10 @@
     <style>
         body {
             font-family: 'Plus Jakarta Sans', sans-serif;
-            /* Latar belakang gradasi animasi bergerak dinamis ala Masjidil Haram */
-            background: linear-gradient(-45deg, #022c22, #064e3b, #0f766e, #047857, #134e4a);
-            background-size: 400% 400%;
-            animation: gradientMove 10s ease infinite;
+            /* Background Gambar Bergerak (GIF Thawaf Mekah) dengan Lapisan Gelap Elegan */
+            background: linear-gradient(rgba(2, 44, 34, 0.70), rgba(2, 30, 22, 0.80)), 
+                        url('https://images.unsplash.com/photo-1565552403635-430e339bde26?auto=format&fit=crop&w=1920&q=80') no-repeat center center fixed;
+            background-size: cover;
             overflow: hidden;
             height: 100vh;
             width: 100vw;
@@ -24,11 +24,6 @@
             justify-content: space-between;
             padding: 1.5rem;
             box-sizing: border-box;
-        }
-        @keyframes gradientMove {
-            0% { background-position: 0% 50%; }
-            50% { background-position: 100% 50%; }
-            100% { background-position: 0% 50%; }
         }
         .font-amiri {
             font-family: 'Amiri', serif;
@@ -113,7 +108,7 @@
         </div>
         <!-- Maghrib -->
         <div class="bg-amber-900/40 backdrop-blur-md rounded-2xl p-4 text-center shadow-lg border border-amber-500/30">
-            <h3 class="text-amber-200 font-2xl font-bold uppercase tracking-wider text-xs mb-1">Maghrib</h3>
+            <h3 class="text-amber-200 font-bold uppercase tracking-wider text-xs mb-1">Maghrib</h3>
             <div id="time-maghrib" class="text-2xl font-black text-white">--:--</div>
         </div>
         <!-- Isya -->
