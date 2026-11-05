@@ -4,30 +4,26 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Informasi Mesjid Al-Kautsar</title>
-    <!-- Google Fonts: Plus Jakarta Sans & Amiri untuk nuansa Islami yang modern -->
+    <!-- Google Fonts: Plus Jakarta Sans & Amiri -->
     <link href="https://fonts.googleapis.com/css2?family=Amiri:wght@700&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-    <!-- Tailwind CSS untuk styling cepat dan rapi -->
+    <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
         body {
             font-family: 'Plus Jakarta Sans', sans-serif;
-            background: linear-gradient(135deg, #064e3b 0%, #022c22 100%);
-            overflow: hidden; /* Mencegah scroll di TV */
+            /* Background Gambar Mekah dengan Lapisan Gelap (Overlay) agar teks kontras */
+            background: linear-gradient(rgba(2, 44, 34, 0.75), rgba(2, 30, 22, 0.85)), 
+                        url('https://images.unsplash.com/photo-1591604129939-f1efa4d9f7fa?auto=format&fit=crop&w=1920&q=80') no-repeat center center fixed;
+            background-size: cover;
+            overflow: hidden;
         }
         .font-amiri {
             font-family: 'Amiri', serif;
         }
         .glass-card {
-            background: rgba(255, 255, 255, 0.07);
+            background: rgba(0, 0, 0, 0.4);
             backdrop-filter: blur(12px);
-            border: 1px solid rgba(255, 255, 255, 0.12);
-        }
-        .active-prayer {
-            background: linear-gradient(135deg, #10b981 0%, #059669 100%) !important;
-            border-color: #34d399 !important;
-            box-shadow: 0 10px 25px -5px rgba(16, 185, 129, 0.4);
-            transform: scale(1.03);
-            transition: all 0.3s ease;
+            border: 1px solid rgba(255, 255, 255, 0.15);
         }
     </style>
 </head>
@@ -39,27 +35,25 @@
             <div class="bg-emerald-500/20 p-3.5 rounded-xl border border-emerald-500/30">
                 <!-- Ikon Masjid SVG -->
                 <svg class="w-10 h-10 text-emerald-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round5" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0H5m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"></path>
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0H5m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"></path>
                 </svg>
             </div>
             <div>
                 <h1 class="text-3xl font-extrabold tracking-wide text-emerald-300 font-amiri">MESJID AL-KAUTSAR</h1>
-                <p class="text-sm text-emerald-100/80 font-medium">Komplek Puri Mega Citra, Ciheulang, Ciparay, Kab. Bandung</p>
+                <p class="text-sm text-emerald-100/90 font-medium">Komplek Puri Mega Citra, Ciheulang, Ciparay, Kab. Bandung</p>
             </div>
         </div>
         
         <!-- Jam & Tanggal Realtime -->
         <div class="text-right">
             <div id="live-clock" class="text-4xl font-black tracking-wider text-emerald-400">00:00:00</div>
-            <div id="live-date" class="text-sm font-medium text-emerald-100/80 mt-0.5">Memuat tanggal...</div>
+            <div id="live-date" class="text-sm font-medium text-emerald-100/90 mt-0.5">Memuat tanggal...</div>
         </div>
     </header>
 
-    <!-- CONTENT BODY: Ayat/Hadits Utama & Info Berjalan -->
+    <!-- CONTENT BODY: Ayat/Hadits Utama -->
     <main class="grid grid-cols-12 gap-6 my-6 flex-grow items-center">
-        <!-- Kolom Kiri: Pesan / Kutipan Islami -->
         <div class="col-span-12 glass-card rounded-2xl p-8 text-center relative overflow-hidden shadow-xl">
-            <div class="absolute -right-10 -bottom-10 text-emerald-600/10 font-amiri text-9{-}select-none"></div>
             <p class="text-xl font-amiri text-emerald-200 mb-2">"Sesungguhnya shalat itu adalah fardhu yang ditentukan waktunya atas orang-orang yang beriman."</p>
             <span class="text-xs uppercase tracking-widest text-emerald-400 font-semibold">(QS. An-Nisa: 103)</span>
         </div>
@@ -94,9 +88,8 @@
         </div>
     </footer>
 
-    <!-- SCRIPT JAVASCRIPT: Jam Realtime & API Jadwal Sholat Kemenag RI -->
+    <!-- SCRIPT JAVASCRIPT: Jam & API Kemenag RI -->
     <script>
-        // 1. Fungsi Jam Realtime
         function updateClock() {
             const now = new Date();
             document.getElementById('live-clock').innerText = now.toLocaleTimeString('id-ID', { hour12: false });
@@ -107,7 +100,6 @@
         setInterval(updateClock, 1000);
         updateClock();
 
-        // 2. Ambil Jadwal Sholat Otomatis (API Kemenag / MyQuran - ID 1211 untuk Kab. Bandung)
         async function fetchJadwalSholat() {
             const today = new Date().toISOString().split('T')[0];
             const idKotaKabBandung = "1211"; 
