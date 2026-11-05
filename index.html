@@ -11,8 +11,8 @@
     <style>
         body {
             font-family: 'Plus Jakarta Sans', sans-serif;
-            /* Background Gambar Mekah dengan Lapisan Gelap (Overlay) agar teks kontras */
-            background: linear-gradient(rgba(2, 44, 34, 0.75), rgba(2, 30, 22, 0.85)), 
+            /* Background Gambar Mekah dengan Lapisan Gelap (Overlay) */
+            background: linear-gradient(rgba(2, 44, 34, 0.70), rgba(2, 30, 22, 0.80)), 
                         url('https://images.unsplash.com/photo-1591604129939-f1efa4d9f7fa?auto=format&fit=crop&w=1920&q=80') no-repeat center center fixed;
             background-size: cover;
             overflow: hidden;
@@ -21,70 +21,92 @@
             font-family: 'Amiri', serif;
         }
         .glass-card {
-            background: rgba(0, 0, 0, 0.4);
-            backdrop-filter: blur(12px);
+            background: rgba(0, 0, 0, 0.45);
+            backdrop-filter: blur(10px);
             border: 1px solid rgba(255, 255, 255, 0.15);
         }
     </style>
 </head>
-<body class="text-white h-screen w-screen flex flex-col justify-between p-8">
+<body class="text-white h-screen w-screen flex flex-col justify-between p-6">
 
     <!-- HEADER: Identitas Mesjid & Jam Utama -->
-    <header class="flex justify-between items-center glass-card rounded-2xl px-8 py-5 shadow-2xl">
+    <header class="flex justify-between items-center glass-card rounded-2xl px-8 py-4 shadow-2xl">
         <div class="flex items-center space-x-5">
-            <div class="bg-emerald-500/20 p-3.5 rounded-xl border border-emerald-500/30">
+            <div class="bg-emerald-500/20 p-3 rounded-xl border border-emerald-500/30">
                 <!-- Ikon Masjid SVG -->
-                <svg class="w-10 h-10 text-emerald-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <svg class="w-9 h-9 text-emerald-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0H5m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"></path>
                 </svg>
             </div>
             <div>
-                <h1 class="text-3xl font-extrabold tracking-wide text-emerald-300 font-amiri">MESJID AL-KAUTSAR</h1>
-                <p class="text-sm text-emerald-100/90 font-medium">Komplek Puri Mega Citra, Ciheulang, Ciparay, Kab. Bandung</p>
+                <h1 class="text-2xl font-extrabold tracking-wide text-emerald-300 font-amiri">MESJID AL-KAUTSAR</h1>
+                <p class="text-xs text-emerald-100/90 font-medium">Komplek Puri Mega Citra, Ciheulang, Ciparay, Kab. Bandung</p>
             </div>
         </div>
         
         <!-- Jam & Tanggal Realtime -->
         <div class="text-right">
-            <div id="live-clock" class="text-4xl font-black tracking-wider text-emerald-400">00:00:00</div>
-            <div id="live-date" class="text-sm font-medium text-emerald-100/90 mt-0.5">Memuat tanggal...</div>
+            <div id="live-clock" class="text-4xl font-black tracking-wider text-amber-400">00:00:00</div>
+            <div id="live-date" class="text-xs font-medium text-emerald-100/90 mt-0.5">Memuat tanggal...</div>
         </div>
     </header>
 
-    <!-- CONTENT BODY: Ayat/Hadits Utama -->
-    <main class="grid grid-cols-12 gap-6 my-6 flex-grow items-center">
-        <div class="col-span-12 glass-card rounded-2xl p-8 text-center relative overflow-hidden shadow-xl">
-            <p class="text-xl font-amiri text-emerald-200 mb-2">"Sesungguhnya shalat itu adalah fardhu yang ditentukan waktunya atas orang-orang yang beriman."</p>
+    <!-- CONTENT BODY: Ayat Utama & Info Kegiatan Masjid -->
+    <main class="grid grid-cols-12 gap-4 my-4 flex-grow items-center">
+        <!-- Kotak Ayat Al-Qur'an -->
+        <div class="col-span-12 glass-card rounded-2xl p-6 text-center shadow-xl">
+            <p class="text-xl font-amiri text-emerald-200 mb-1">"Sesungguhnya shalat itu adalah fardhu yang ditentukan waktunya atas orang-orang yang beriman."</p>
             <span class="text-xs uppercase tracking-widest text-emerald-400 font-semibold">(QS. An-Nisa: 103)</span>
+        </div>
+
+        <!-- Info Kegiatan Masjid (Meniru Referensi) -->
+        <div class="col-span-12 grid grid-cols-3 gap-4">
+            <div class="glass-card rounded-xl p-3 border-l-4 border-emerald-400">
+                <span class="text-xs text-emerald-300 font-bold block uppercase">Kajian Rutin Sabtu Pagi</span>
+                <span class="text-xs text-white">Sabtu, Pukul 08.00 WIB s/d Selesai</span>
+            </div>
+            <div class="glass-card rounded-xl p-3 border-l-4 border-amber-400">
+                <span class="text-xs text-amber-300 font-bold block uppercase">Kajian Bulanan Remaja</span>
+                <span class="text-xs text-white">Pekan ke-2, Selepas Maghrib</span>
+            </div>
+            <div class="glass-card rounded-xl p-3 border-l-4 border-cyan-400">
+                <span class="text-xs text-cyan-300 font-bold block uppercase">Santunan Anak Yatim</span>
+                <span class="text-xs text-white">Setiap Hari Jum'at Berkah</span>
+            </div>
         </div>
     </main>
 
-    <!-- FOOTER: Jadwal Sholat Otomatis Kemenag RI -->
-    <footer class="grid grid-cols-5 gap-5">
-        <!-- Subuh -->
-        <div id="card-subuh" class="glass-card rounded-2xl p-5 text-center transition-all duration-300">
-            <h3 class="text-emerald-300 font-bold uppercase tracking-wider text-sm mb-1">Subuh</h3>
-            <div id="time-subuh" class="text-3xl font-black text-white">--:--</div>
+    <!-- FOOTER: Kotak Jadwal Sholat Warna-Warni ala Referensi -->
+    <footer class="grid grid-cols-6 gap-3">
+        <!-- Subuh (Merah) -->
+        <div class="bg-red-600/90 backdrop-blur-md rounded-2xl p-4 text-center shadow-lg border border-red-400/30">
+            <h3 class="text-red-100 font-bold uppercase tracking-wider text-xs mb-1">Subuh</h3>
+            <div id="time-subuh" class="text-2xl font-black text-white">--:--</div>
         </div>
-        <!-- Dzuhur -->
-        <div id="card-dzuhur" class="glass-card rounded-2xl p-5 text-center transition-all duration-300">
-            <h3 class="text-emerald-300 font-bold uppercase tracking-wider text-sm mb-1">Dzuhur</h3>
-            <div id="time-dzuhur" class="text-3xl font-black text-white">--:--</div>
+        <!-- Terbit (Abu-abu Kebiruan) -->
+        <div class="bg-slate-600/90 backdrop-blur-md rounded-2xl p-4 text-center shadow-lg border border-slate-400/30">
+            <h3 class="text-slate-100 font-bold uppercase tracking-wider text-xs mb-1">Terbit</h3>
+            <div id="time-terbit" class="text-2xl font-black text-white">--:--</div>
         </div>
-        <!-- Ashar -->
-        <div id="card-ashar" class="glass-card rounded-2xl p-5 text-center transition-all duration-300">
-            <h3 class="text-emerald-300 font-bold uppercase tracking-wider text-sm mb-1">Ashar</h3>
-            <div id="time-ashar" class="text-3xl font-black text-white">--:--</div>
+        <!-- Dzuhur (Biru Toska) -->
+        <div class="bg-teal-600/90 backdrop-blur-md rounded-2xl p-4 text-center shadow-lg border border-teal-400/30">
+            <h3 class="text-teal-100 font-bold uppercase tracking-wider text-xs mb-1">Dzuhur</h3>
+            <div id="time-dzuhur" class="text-2xl font-black text-white">--:--</div>
         </div>
-        <!-- Maghrib -->
-        <div id="card-maghrib" class="glass-card rounded-2xl p-5 text-center transition-all duration-300">
-            <h3 class="text-emerald-300 font-bold uppercase tracking-wider text-sm mb-1">Maghrib</h3>
-            <div id="time-maghrib" class="text-3xl font-black text-white">--:--</div>
+        <!-- Ashar (Hijau) -->
+        <div class="bg-emerald-600/90 backdrop-blur-md rounded-2xl p-4 text-center shadow-lg border border-emerald-400/30">
+            <h3 class="text-emerald-100 font-bold uppercase tracking-wider text-xs mb-1">Ashar</h3>
+            <div id="time-ashar" class="text-2xl font-black text-white">--:--</div>
         </div>
-        <!-- Isya -->
-        <div id="card-isya" class="glass-card rounded-2xl p-5 text-center transition-all duration-300">
-            <h3 class="text-emerald-300 font-bold uppercase tracking-wider text-sm mb-1">Isya</h3>
-            <div id="time-isya" class="text-3xl font-black text-white">--:--</div>
+        <!-- Maghrib (Jingga/Oranye) -->
+        <div class="bg-amber-600/90 backdrop-blur-md rounded-2xl p-4 text-center shadow-lg border border-amber-400/30">
+            <h3 class="text-amber-100 font-bold uppercase tracking-wider text-xs mb-1">Maghrib</h3>
+            <div id="time-maghrib" class="text-2xl font-black text-white">--:--</div>
+        </div>
+        <!-- Isya (Magenta/Pink Tua) -->
+        <div class="bg-pink-700/90 backdrop-blur-md rounded-2xl p-4 text-center shadow-lg border border-pink-500/30">
+            <h3 class="text-pink-100 font-bold uppercase tracking-wider text-xs mb-1">Isya</h3>
+            <div id="time-isya" class="text-2xl font-black text-white">--:--</div>
         </div>
     </footer>
 
@@ -102,7 +124,7 @@
 
         async function fetchJadwalSholat() {
             const today = new Date().toISOString().split('T')[0];
-            const idKotaKabBandung = "1211"; 
+            const idKotaKabBandung = "1211"; // ID Kabupaten Bandung
             const url = `https://api.myquran.com/v2/sholat/jadwal/${idKotaKabBandung}/${today}`;
 
             try {
@@ -112,6 +134,7 @@
                 if (data.status) {
                     const j = data.data.jadwal;
                     document.getElementById('time-subuh').innerText = j.subuh;
+                    document.getElementById('time-terbit').innerText = j.terbit;
                     document.getElementById('time-dzuhur').innerText = j.dzuhur;
                     document.getElementById('time-ashar').innerText = j.ashar;
                     document.getElementById('time-maghrib').innerText = j.maghrib;
