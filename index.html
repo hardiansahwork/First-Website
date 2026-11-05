@@ -11,8 +11,8 @@
     <style>
         body {
             font-family: 'Plus Jakarta Sans', sans-serif;
-            /* Background Masjid Nabawi yang cerah dengan Lapisan Gelap Elegan */
-            background: linear-gradient(rgba(2, 44, 34, 0.65), rgba(2, 30, 22, 0.75)), 
+            /* Background Masjid Nabawi dengan Lapisan Terang (Overlay tipis agar foto sangat jelas & cerah) */
+            background: linear-gradient(rgba(2, 44, 34, 0.25), rgba(2, 30, 22, 0.35)), 
                         url('https://images.unsplash.com/photo-1591604129939-f1efa4d9f7fa?auto=format&fit=crop&w=1920&q=80') no-repeat center center fixed;
             background-size: cover;
             overflow: hidden;
@@ -29,9 +29,9 @@
             font-family: 'Amiri', serif;
         }
         .glass-card {
-            background: rgba(0, 0, 0, 0.45);
+            background: rgba(0, 0, 0, 0.55);
             backdrop-filter: blur(12px);
-            border: 1px solid rgba(255, 255, 255, 0.15);
+            border: 1px solid rgba(255, 255, 255, 0.25);
         }
     </style>
 </head>
@@ -87,32 +87,32 @@
     <!-- FOOTER: Kotak Jadwal Sholat Semi-Transparan (Warna-Warni Elegan) -->
     <footer class="grid grid-cols-6 gap-3">
         <!-- Subuh -->
-        <div class="bg-red-900/40 backdrop-blur-md rounded-2xl p-4 text-center shadow-lg border border-red-500/30">
+        <div class="bg-red-900/60 backdrop-blur-md rounded-2xl p-4 text-center shadow-lg border border-red-400/40">
             <h3 class="text-red-200 font-bold uppercase tracking-wider text-xs mb-1">Subuh</h3>
             <div id="time-subuh" class="text-2xl font-black text-white">--:--</div>
         </div>
         <!-- Terbit -->
-        <div class="bg-slate-800/40 backdrop-blur-md rounded-2xl p-4 text-center shadow-lg border border-slate-500/30">
+        <div class="bg-slate-800/60 backdrop-blur-md rounded-2xl p-4 text-center shadow-lg border border-slate-400/40">
             <h3 class="text-slate-200 font-bold uppercase tracking-wider text-xs mb-1">Terbit</h3>
             <div id="time-terbit" class="text-2xl font-black text-white">--:--</div>
         </div>
         <!-- Dzuhur -->
-        <div class="bg-teal-900/40 backdrop-blur-md rounded-2xl p-4 text-center shadow-lg border border-teal-500/30">
+        <div class="bg-teal-900/60 backdrop-blur-md rounded-2xl p-4 text-center shadow-lg border border-teal-400/40">
             <h3 class="text-teal-200 font-bold uppercase tracking-wider text-xs mb-1">Dzuhur</h3>
             <div id="time-dzuhur" class="text-2xl font-black text-white">--:--</div>
         </div>
         <!-- Ashar -->
-        <div class="bg-emerald-900/40 backdrop-blur-md rounded-2xl p-4 text-center shadow-lg border border-emerald-500/30">
+        <div class="bg-emerald-900/60 backdrop-blur-md rounded-2xl p-4 text-center shadow-lg border border-emerald-400/40">
             <h3 class="text-emerald-200 font-bold uppercase tracking-wider text-xs mb-1">Ashar</h3>
             <div id="time-ashar" class="text-2xl font-black text-white">--:--</div>
         </div>
         <!-- Maghrib -->
-        <div class="bg-amber-900/40 backdrop-blur-md rounded-2xl p-4 text-center shadow-lg border border-amber-500/30">
+        <div class="bg-amber-900/60 backdrop-blur-md rounded-2xl p-4 text-center shadow-lg border border-amber-400/40">
             <h3 class="text-amber-200 font-bold uppercase tracking-wider text-xs mb-1">Maghrib</h3>
             <div id="time-maghrib" class="text-2xl font-black text-white">--:--</div>
         </div>
         <!-- Isya -->
-        <div class="bg-pink-900/40 backdrop-blur-md rounded-2xl p-4 text-center shadow-lg border border-pink-500/30">
+        <div class="bg-pink-900/60 backdrop-blur-md rounded-2xl p-4 text-center shadow-lg border border-pink-400/40">
             <h3 class="text-pink-200 font-bold uppercase tracking-wider text-xs mb-1">Isya</h3>
             <div id="time-isya" class="text-2xl font-black text-white">--:--</div>
         </div>
