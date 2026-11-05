@@ -19,9 +19,9 @@
             font-family: 'Plus Jakarta Sans', sans-serif;
         }
         
-        /* STEP 1: Background Masjid Al-Jabbar Full Screen */
+        /* BACKGROUND MASJID AL-JABBAR MALAM HARI */
         body {
-            background: url('https://images.unsplash.com/photo-1591604129939-f1efa4d9f7fa?w=1920') no-repeat center center fixed;
+            background: url('https://images.unsplash.com/photo-1584551246679-0daf3d275d0f?w=1920') no-repeat center center fixed;
             background-size: cover;
             position: relative;
         }
@@ -29,11 +29,11 @@
             content: '';
             position: absolute;
             inset: 0;
-            background: rgba(0, 0, 0, 0.3);
+            background: rgba(0, 0, 0, 0.25);
             z-index: 1;
         }
 
-        /* STEP 2: Identitas Masjid & Tanggal di Kanan Atas */
+        /* IDENTITAS MASJID & TANGGAL DI KANAN ATAS */
         .header-right {
             position: absolute;
             top: 25px;
@@ -104,7 +104,7 @@
             color: #facc15;
         }
 
-        /* STEP 3: Panel Jadwal Sholat Vertikal Penuh dari Atas ke Bawah */
+        /* PANEL JADWAL SHOLAT VERTIKAL PENUH DI KIRI */
         .prayer-sidebar {
             position: absolute;
             top: 25px;
@@ -118,7 +118,7 @@
         }
 
         .prayer-card {
-            flex-grow: 1; /* Membuat kartu memanjang merata memenuhi ruang vertikal */
+            flex-grow: 1;
             padding: 12px 20px;
             border-radius: 12px;
             backdrop-filter: blur(6px);
@@ -132,21 +132,20 @@
         .prayer-name {
             font-size: 18px;
             font-weight: 700;
-            color: #facc15; /* Warna Kuning Kontras */
+            color: #facc15;
             text-shadow: 1px 1px 3px rgba(0,0,0,0.8);
         }
 
         .prayer-time {
             font-size: 40px;
             font-weight: 800;
-            color: #ffffff; /* Font putih tebal */
+            color: #ffffff;
             letter-spacing: 1px;
             text-shadow: 2px 2px 6px rgba(0,0,0,0.8);
             line-height: 1.1;
             margin-top: 2px;
         }
 
-        /* Warna Latar Belakang Agak Transparan Sesuai Referensi */
         .bg-shubuh { background: rgba(20, 35, 30, 0.78); }
         .bg-syuruq { background: rgba(20, 85, 100, 0.78); }
         .bg-dzuhur { background: rgba(70, 45, 80, 0.78); }
@@ -157,7 +156,7 @@
 </head>
 <body>
 
-    <!-- STEP 3: Panel Jadwal Sholat Vertikal Penuh -->
+    <!-- Panel Jadwal Sholat Vertikal Penuh -->
     <div class="prayer-sidebar">
         <div class="prayer-card bg-shubuh">
             <div class="prayer-name">Shubuh</div>
@@ -185,7 +184,7 @@
         </div>
     </div>
 
-    <!-- STEP 2: Bagian Kanan Atas (Identitas & Tanggal) -->
+    <!-- Bagian Kanan Atas (Identitas & Tanggal) -->
     <div class="header-right">
         <div>
             <h1 class="mosque-title"><span>Masjid</span> Al-Kautsar</h1>
