@@ -11,8 +11,8 @@
     <style>
         body {
             font-family: 'Plus Jakarta Sans', sans-serif;
-            /* Background Masjid Nabawi dengan Lapisan Terang (Overlay tipis agar foto sangat jelas & cerah) */
-            background: linear-gradient(rgba(2, 44, 34, 0.25), rgba(2, 30, 22, 0.35)), 
+            /* Background Masjid Cerah dengan Overlay Sangat Tipis */
+            background: linear-gradient(rgba(2, 44, 34, 0.15), rgba(2, 30, 22, 0.25)), 
                         url('https://images.unsplash.com/photo-1591604129939-f1efa4d9f7fa?auto=format&fit=crop&w=1920&q=80') no-repeat center center fixed;
             background-size: cover;
             overflow: hidden;
@@ -28,111 +28,217 @@
         .font-amiri {
             font-family: 'Amiri', serif;
         }
-        .glass-card {
-            background: rgba(0, 0, 0, 0.55);
+        /* Panel Sidebar Jadwal Sholat Melengkung Elegan */
+        .sidebar-panel {
+            background: rgba(10, 25, 20, 0.85);
             backdrop-filter: blur(12px);
-            border: 1px solid rgba(255, 255, 255, 0.25);
+            border-right: 2px solid rgba(234, 179, 8, 0.4);
+            border-radius: 0 2rem 2rem 0;
+        }
+        .glass-top {
+            background: rgba(0, 0, 0, 0.55);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+        /* Styling Jam Analog */
+        .analog-clock {
+            width: 220px;
+            height: 220px;
+            border: 6px solid #eab308;
+            border-radius: 50%;
+            position: relative;
+            background: rgba(10, 25, 20, 0.9);
+            box-shadow: 0 0 30px rgba(234, 179, 8, 0.4);
+        }
+        .clock-hand {
+            position: absolute;
+            bottom: 50%;
+            left: 50%;
+            transform-origin: bottom;
+            border-radius: 4px;
+        }
+        .hour-hand { width: 6px; height: 55px; background: #ffffff; margin-left: -3px; }
+        .minute-hand { width: 4px; height: 75px; background: #eab308; margin-left: -2px; }
+        .second-hand { width: 2px; height: 85px; background: #ef4444; margin-left: -1px; }
+        .center-dot {
+            width: 12px; height: 12px; background: #eab308; border-radius: 50%;
+            position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);
         }
     </style>
 </head>
 <body>
 
-    <!-- HEADER: Identitas Mesjid & Jam Utama -->
-    <header class="flex justify-between items-center glass-card rounded-2xl px-8 py-4 shadow-2xl">
-        <div class="flex items-center space-x-5">
-            <div class="bg-emerald-500/20 p-3 rounded-xl border border-emerald-500/30">
-                <!-- Ikon Masjid SVG -->
-                <svg class="w-9 h-9 text-emerald-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+    <!-- BAGIAN ATAS: Header & Identitas Masjid -->
+    <header class="flex justify-between items-center px-6 py-3 glass-top rounded-2xl shadow-xl z-10">
+        <div>
+            <h1 class="text-3xl font-extrabold tracking-wide text-amber-300 font-amiri">Mesjid Al-Kautsar</h1>
+            <p class="text-xs text-emerald-100 font-medium">Komplek Puri Mega Citra, Ciheulang, Ciparay, Kab. Bandung</p>
+        </div>
+        <div class="flex items-center space-x-4">
+            <div class="text-right">
+                <div id="header-date" class="text-sm font-semibold text-amber-200">Memuat Tanggal...</div>
+                <div id="header-hijri" class="text-xs text-emerald-200">Memuat Kalender Hijriyah...</div>
+            </div>
+            <div class="bg-amber-500/20 p-2.5 rounded-xl border border-amber-500/30 text-amber-300">
+                <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0H5m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"></path>
                 </svg>
             </div>
-            <div>
-                <h1 class="text-2xl font-extrabold tracking-wide text-emerald-300 font-amiri">MESJID AL-KAUTSAR</h1>
-                <p class="text-xs text-emerald-100/90 font-medium">Komplek Puri Mega Citra, Ciheulang, Ciparay, Kab. Bandung</p>
-            </div>
-        </div>
-        
-        <!-- Jam & Tanggal Realtime -->
-        <div class="text-right">
-            <div id="live-clock" class="text-4xl font-black tracking-wider text-amber-400">00:00:00</div>
-            <div id="live-date" class="text-xs font-medium text-emerald-100/90 mt-0.5">Memuat tanggal...</div>
         </div>
     </header>
 
-    <!-- CONTENT BODY: Ayat Utama & Info Kegiatan Masjid -->
-    <main class="grid grid-cols-12 gap-4 my-4 flex-grow items-center">
-        <!-- Kotak Ayat Al-Qur'an -->
-        <div class="col-span-12 glass-card rounded-2xl p-6 text-center shadow-xl">
-            <p class="text-xl font-amiri text-emerald-200 mb-1">"Sesungguhnya shalat itu adalah fardhu yang ditentukan waktunya atas orang-orang yang beriman."</p>
-            <span class="text-xs uppercase tracking-widest text-emerald-400 font-semibold">(QS. An-Nisa: 103)</span>
+    <!-- BAGIAN UTAMA: Sidebar Jadwal Sholat & Jam Analog di Tengah -->
+    <main class="grid grid-cols-12 gap-6 my-auto items-center flex-grow">
+        
+        <!-- SIDEBAR KIRI: Daftar Waktu Sholat -->
+        <div class="col-span-4 sidebar-panel p-5 flex flex-col justify-around space-y-3 shadow-2xl h-[520px]">
+            
+            <!-- Subuh -->
+            <div class="flex justify-between items-center border-b border-white/10 pb-2">
+                <div class="flex items-center space-x-3">
+                    <span class="text-amber-400 text-xl">☀️</span>
+                    <div>
+                        <div class="text-amber-300 font-bold text-lg">Subuh</div>
+                        <div class="text-[11px] text-gray-300">IQAMAH <span id="iqamah-subuh">--:--</span></div>
+                    </div>
+                </div>
+                <div id="time-subuh" class="text-3xl font-black text-amber-400 tracking-wider">--:--</div>
+            </div>
+
+            <!-- Syuruq / Terbit -->
+            <div class="flex justify-between items-center border-b border-white/10 pb-2">
+                <div class="flex items-center space-x-3">
+                    <span class="text-amber-300 text-xl">🌅</span>
+                    <div>
+                        <div class="text-amber-200 font-bold text-lg">Syuruq</div>
+                        <div class="text-[11px] text-gray-300">Terbit Matahari</div>
+                    </div>
+                </div>
+                <div id="time-terbit" class="text-3xl font-black text-amber-200 tracking-wider">--:--</div>
+            </div>
+
+            <!-- Dzuhur -->
+            <div class="flex justify-between items-center border-b border-white/10 pb-2">
+                <div class="flex items-center space-x-3">
+                    <span class="text-amber-400 text-xl">🌞</span>
+                    <div>
+                        <div class="text-amber-300 font-bold text-lg">Dzuhur</div>
+                        <div class="text-[11px] text-gray-300">IQAMAH <span id="iqamah-dzuhur">--:--</span></div>
+                    </div>
+                </div>
+                <div id="time-dzuhur" class="text-3xl font-black text-amber-400 tracking-wider">--:--</div>
+            </div>
+
+            <!-- Ashar -->
+            <div class="flex justify-between items-center border-b border-white/10 pb-2">
+                <div class="flex items-center space-x-3">
+                    <span class="text-amber-400 text-xl">⛅</span>
+                    <div>
+                        <div class="text-amber-300 font-bold text-lg">Ashar</div>
+                        <div class="text-[11px] text-gray-300">IQAMAH <span id="iqamah-ashar">--:--</span></div>
+                    </div>
+                </div>
+                <div id="time-ashar" class="text-3xl font-black text-amber-400 tracking-wider">--:--</div>
+            </div>
+
+            <!-- Maghrib -->
+            <div class="flex justify-between items-center border-b border-white/10 pb-2">
+                <div class="flex items-center space-x-3">
+                    <span class="text-amber-400 text-xl">🌇</span>
+                    <div>
+                        <div class="text-amber-300 font-bold text-lg">Maghrib</div>
+                        <div class="text-[11px] text-gray-300">IQAMAH <span id="iqamah-maghrib">--:--</span></div>
+                    </div>
+                </div>
+                <div id="time-maghrib" class="text-3xl font-black text-amber-400 tracking-wider">--:--</div>
+            </div>
+
+            <!-- Isya -->
+            <div class="flex justify-between items-center pb-1">
+                <div class="flex items-center space-x-3">
+                    <span class="text-amber-400 text-xl">🌙</span>
+                    <div>
+                        <div class="text-amber-300 font-bold text-lg">Isya</div>
+                        <div class="text-[11px] text-gray-300">IQAMAH <span id="iqamah-isya">--:--</span></div>
+                    </div>
+                </div>
+                <div id="time-isya" class="text-3xl font-black text-amber-400 tracking-wider">--:--</div>
+            </div>
+
         </div>
 
-        <!-- Info Kegiatan Masjid -->
-        <div class="col-span-12 grid grid-cols-3 gap-4">
-            <div class="glass-card rounded-xl p-3 border-l-4 border-emerald-400">
-                <span class="text-xs text-emerald-300 font-bold block uppercase">Kajian Rutin Sabtu Pagi</span>
-                <span class="text-xs text-white">Sabtu, Pukul 08.00 WIB s/d Selesai</span>
+        <!-- TENGAH: Jam Analog Eksklusif -->
+        <div class="col-span-8 flex flex-col items-center justify-center">
+            <div class="analog-clock shadow-2xl">
+                <!-- Angka Jam Utama -->
+                <div style="position: absolute; width: 100%; height: 100%; text-align: center; color: #eab308; font-weight: bold; font-size: 18px;">
+                    <span style="position: absolute; top: 8px; left: 50%; transform: translateX(-50%);">12</span>
+                    <span style="position: absolute; right: 12px; top: 50%; transform: translateY(-50%);">3</span>
+                    <span style="position: absolute; bottom: 8px; left: 50%; transform: translateX(-50%);">6</span>
+                    <span style="position: absolute; left: 12px; top: 50%; transform: translateY(-50%);">9</span>
+                </div>
+                <!-- Jarum Jam -->
+                <div id="hour-hand" class="clock-hand hour-hand"></div>
+                <div id="minute-hand" class="clock-hand minute-hand"></div>
+                <div id="second-hand" class="clock-hand second-hand"></div>
+                <div class="center-dot"></div>
             </div>
-            <div class="glass-card rounded-xl p-3 border-l-4 border-amber-400">
-                <span class="text-xs text-amber-300 font-bold block uppercase">Kajian Bulanan Remaja</span>
-                <span class="text-xs text-white">Pekan ke-2, Selepas Maghrib</span>
-            </div>
-            <div class="glass-card rounded-xl p-3 border-l-4 border-cyan-400">
-                <span class="text-xs text-cyan-300 font-bold block uppercase">Santunan Anak Yatim</span>
-                <span class="text-xs text-white">Setiap Hari Jum'at Berkah</span>
-            </div>
+            <div id="digital-clock" class="text-5xl font-black text-amber-400 mt-4 tracking-widest drop-shadow-lg">00:00:00</div>
         </div>
+
     </main>
 
-    <!-- FOOTER: Kotak Jadwal Sholat Semi-Transparan (Warna-Warni Elegan) -->
-    <footer class="grid grid-cols-6 gap-3">
-        <!-- Subuh -->
-        <div class="bg-red-900/60 backdrop-blur-md rounded-2xl p-4 text-center shadow-lg border border-red-400/40">
-            <h3 class="text-red-200 font-bold uppercase tracking-wider text-xs mb-1">Subuh</h3>
-            <div id="time-subuh" class="text-2xl font-black text-white">--:--</div>
-        </div>
-        <!-- Terbit -->
-        <div class="bg-slate-800/60 backdrop-blur-md rounded-2xl p-4 text-center shadow-lg border border-slate-400/40">
-            <h3 class="text-slate-200 font-bold uppercase tracking-wider text-xs mb-1">Terbit</h3>
-            <div id="time-terbit" class="text-2xl font-black text-white">--:--</div>
-        </div>
-        <!-- Dzuhur -->
-        <div class="bg-teal-900/60 backdrop-blur-md rounded-2xl p-4 text-center shadow-lg border border-teal-400/40">
-            <h3 class="text-teal-200 font-bold uppercase tracking-wider text-xs mb-1">Dzuhur</h3>
-            <div id="time-dzuhur" class="text-2xl font-black text-white">--:--</div>
-        </div>
-        <!-- Ashar -->
-        <div class="bg-emerald-900/60 backdrop-blur-md rounded-2xl p-4 text-center shadow-lg border border-emerald-400/40">
-            <h3 class="text-emerald-200 font-bold uppercase tracking-wider text-xs mb-1">Ashar</h3>
-            <div id="time-ashar" class="text-2xl font-black text-white">--:--</div>
-        </div>
-        <!-- Maghrib -->
-        <div class="bg-amber-900/60 backdrop-blur-md rounded-2xl p-4 text-center shadow-lg border border-amber-400/40">
-            <h3 class="text-amber-200 font-bold uppercase tracking-wider text-xs mb-1">Maghrib</h3>
-            <div id="time-maghrib" class="text-2xl font-black text-white">--:--</div>
-        </div>
-        <!-- Isya -->
-        <div class="bg-pink-900/60 backdrop-blur-md rounded-2xl p-4 text-center shadow-lg border border-pink-400/40">
-            <h3 class="text-pink-200 font-bold uppercase tracking-wider text-xs mb-1">Isya</h3>
-            <div id="time-isya" class="text-2xl font-black text-white">--:--</div>
-        </div>
+    <!-- BAGIAN BAWAH: Running Text / Informasi Berjalan -->
+    <footer class="glass-top rounded-xl py-3 px-6 flex items-center shadow-xl overflow-hidden z-10">
+        <div class="bg-amber-500 text-black font-bold text-xs px-3 py-1 rounded-lg uppercase mr-4 tracking-wider shrink-0">Info Masjid</div>
+        <marquee class="text-sm font-medium text-emerald-100 tracking-wide">
+            ✨ Selamat datang di Mesjid Al-Kautsar. Harap mematikan atau mengheningkan telepon genggam selama berada di dalam ruang utama masjid. • Jangan lupa menjaga kebersihan dan ketertiban bersama.
+        </marquee>
     </footer>
 
-    <!-- SCRIPT JAVASCRIPT: Jam & API Kemenag RI -->
+    <!-- SCRIPT JAVASCRIPT: Jam Analog, Jam Digital, & API Jadwal Sholat Kemenag RI -->
     <script>
+        // 1. Fungsi Jam Realtime & Jam Analog
         function updateClock() {
             const now = new Date();
-            document.getElementById('live-clock').innerText = now.toLocaleTimeString('id-ID', { hour12: false });
             
+            // Jam Digital Utama
+            document.getElementById('digital-clock').innerText = now.toLocaleTimeString('id-ID', { hour12: false });
+            
+            // Tanggal Masehi
             const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
-            document.getElementById('live-date').innerText = now.toLocaleDateString('id-ID', options);
+            document.getElementById('header-date').innerText = now.toLocaleDateString('id-ID', options);
+
+            // Logika Jarum Jam Analog
+            const seconds = now.getSeconds();
+            const minutes = now.getMinutes();
+            const hours = now.getHours();
+
+            const secondDegrees = (seconds / 60) * 360;
+            const minuteDegrees = ((minutes + seconds / 60) / 60) * 360;
+            const hourDegrees = ((hours % 12 + minutes / 60) / 12) * 360;
+
+            document.getElementById('second-hand').style.transform = `rotate(${secondDegrees}deg)`;
+            document.getElementById('minute-hand').style.transform = `rotate(${minuteDegrees}deg)`;
+            document.getElementById('hour-hand').style.transform = `rotate(${hourDegrees}deg)`;
         }
         setInterval(updateClock, 1000);
         updateClock();
 
+        // 2. Fungsi Tambah Menit untuk Perhitungan Iqamah Otomatis (+10 Menit)
+        function tambahMenit(jamStr, menitTambahan) {
+            if (!jamStr || !jamStr.includes(':')) return '--:--';
+            let [jam, menit] = jamStr.split(':').map(Number);
+            let totalMenit = jam * 60 + menit + menitTambahan;
+            let h = Math.floor(totalMenit / 60) % 24;
+            let m = totalMenit % 60;
+            return String(h).padStart(2, '0') + ':' + String(m).padStart(2, '0');
+        }
+
+        // 3. Ambil Jadwal Sholat Otomatis Kemenag RI (Kab. Bandung - ID 1211)
         async function fetchJadwalSholat() {
             const today = new Date().toISOString().split('T')[0];
-            const idKotaKabBandung = "1211"; // ID Kabupaten Bandung
+            const idKotaKabBandung = "1211"; 
             const url = `https://api.myquran.com/v2/sholat/jadwal/${idKotaKabBandung}/${today}`;
 
             try {
@@ -141,12 +247,26 @@
                 
                 if (data.status) {
                     const j = data.data.jadwal;
+                    
+                    // Masukkan Jam Waktu Sholat
                     document.getElementById('time-subuh').innerText = j.subuh;
                     document.getElementById('time-terbit').innerText = j.terbit;
                     document.getElementById('time-dzuhur').innerText = j.dzuhur;
                     document.getElementById('time-ashar').innerText = j.ashar;
                     document.getElementById('time-maghrib').innerText = j.maghrib;
                     document.getElementById('time-isya').innerText = j.isya;
+
+                    // Hitung Otomatis Jam Iqamah (+10 Menit dari waktu sholat)
+                    document.getElementById('iqamah-subuh').innerText = tambahMenit(j.subuh, 10);
+                    document.getElementById('iqamah-dzuhur').innerText = tambahMenit(j.dzuhur, 10);
+                    document.getElementById('iqamah-ashar').innerText = tambahMenit(j.ashar, 10);
+                    document.getElementById('iqamah-maghrib').innerText = tambahMenit(j.maghrib, 10);
+                    document.getElementById('iqamah-isya').innerText = tambahMenit(j.isya, 10);
+
+                    // Tampilkan Tanggal Hijriyah jika tersedia dari API
+                    if (j.date) {
+                        document.getElementById('header-hijri').innerText = j.date;
+                    }
                 }
             } catch (error) {
                 console.error("Gagal memuat jadwal sholat:", error);
