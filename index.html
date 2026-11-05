@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Informasi Mesjid Al-Kautsar</title>
-    <!-- Google Fonts: Plus Jakarta Sans & Amiri -->
+    <!-- Google Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Amiri:wght@700&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
@@ -27,7 +27,7 @@
         .font-amiri {
             font-family: 'Amiri', serif;
         }
-        /* Sidebar Panel Kiri Berlekuk */
+        /* Sidebar Panel Kiri */
         .prayer-sidebar {
             width: 380px;
             background: linear-gradient(180deg, rgba(12, 25, 38, 0.92) 0%, rgba(6, 14, 22, 0.92) 100%);
@@ -76,7 +76,7 @@
 </head>
 <body>
 
-    <!-- BAGIAN ATAS: Identitas Mesjid -->
+    <!-- HEADER -->
     <header class="flex justify-between items-center px-4 py-1 z-10">
         <div></div>
         <div class="text-right">
@@ -85,12 +85,9 @@
         </div>
     </header>
 
-    <!-- BAGIAN UTAMA: Sidebar Jadwal & Jam Analog -->
+    <!-- CONTENT -->
     <main class="relative flex items-center flex-grow my-1">
-        
-        <!-- SIDEBAR KIRI -->
         <div class="prayer-sidebar h-[520px] px-6 py-3 flex flex-col justify-between">
-            
             <div class="prayer-item flex items-center justify-between">
                 <div class="flex items-center space-x-3">
                     <span class="text-amber-400 text-xl">☀️</span>
@@ -156,10 +153,9 @@
                 </div>
                 <div id="time-isya" class="text-2xl font-black text-amber-300 tracking-wider">--:--</div>
             </div>
-
         </div>
 
-        <!-- JAM ANALOG TENGAH -->
+        <!-- JAM ANALOG -->
         <div class="analog-clock-container">
             <div class="analog-clock flex items-center justify-center">
                 <div style="position: absolute; width: 100%; height: 100%; text-align: center; color: #eab308; font-weight: bold; font-size: 15px;">
@@ -174,10 +170,9 @@
                 <div class="center-dot"></div>
             </div>
         </div>
-
     </main>
 
-    <!-- BAGIAN BAWAH: Tanggal & Running Text -->
+    <!-- FOOTER -->
     <footer class="flex flex-col space-y-1.5 z-10">
         <div class="flex justify-between items-center bg-slate-900/80 backdrop-blur-md rounded-xl px-5 py-2 border border-amber-500/30 shadow-xl">
             <div class="flex items-center space-x-3 text-sm font-semibold text-white">
