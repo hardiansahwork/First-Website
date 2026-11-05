@@ -18,7 +18,7 @@
             content: '';
             position: absolute;
             inset: 0;
-            background: linear-gradient(to right, rgba(5,20,40,0.30), rgba(0,0,0,0.15));
+            background: linear-gradient(to right, rgba(5,20,40,0.25), rgba(0,0,0,0.1));
             z-index: 0;
         }
 
@@ -27,30 +27,41 @@
             z-index: 1;
             width: 100%;
             height: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            padding: 12px;
+        }
+
+        /* LAYOUT UTAMA: PANEL KIRI & AREA KANAN */
+        .main-content {
+            display: flex;
+            gap: 15px;
+            align-items: flex-start;
         }
 
         /* === PANEL JADWAL SHOLAT DI KIRI === */
         .schedule-panel {
-            position: absolute;
-            top: 10px;
-            left: 10px;
-            width: 340px;
-            background: rgba(12, 22, 38, 0.90);
+            width: 380px;
+            background: rgba(12, 22, 38, 0.92);
             border-top-left-radius: 14px;
             border-bottom-left-radius: 14px;
-            border-top-right-radius: 70px;
-            border-bottom-right-radius: 70px;
-            padding: 10px 16px;
+            border-top-right-radius: 80px;
+            border-bottom-right-radius: 80px;
+            padding: 8px 18px;
             box-shadow: 0 10px 30px rgba(0,0,0,0.5);
             border-right: 3px solid rgba(255, 211, 0, 0.6);
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
         }
 
         .s-row {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 4px 0;
-            border-bottom: 1px solid rgba(255,255,255,0.1);
+            padding: 6px 0;
+            border-bottom: 1px solid rgba(255,255,255,0.12);
         }
         .s-row:last-child { border-bottom: none; }
 
@@ -58,42 +69,40 @@
         .s-name {
             display: flex;
             align-items: center;
-            gap: 6px;
-            font-size: 20px;
+            gap: 8px;
+            font-size: 22px;
             font-weight: 700;
             color: #fff;
         }
-        .s-icon { font-size: 18px; color: #ffd300; }
-        .s-note { font-size: 11px; color: #ddd; padding-left: 24px; font-weight: 500; }
-        .s-val { font-size: 32px; font-weight: 900; color: #fff; letter-spacing: 0.5px; }
+        .s-icon { font-size: 20px; color: #ffd300; }
+        .s-note { font-size: 12px; color: #e2e8f0; padding-left: 28px; font-weight: 500; }
+        .s-val { font-size: 38px; font-weight: 900; color: #fff; letter-spacing: 0.5px; line-height: 1; }
 
         /* Warna Baris Kotak Jadwal Sesuai Referensi */
-        .row-shubuh { background: rgba(180, 40, 40, 0.75); margin: -3px -16px; padding: 4px 16px; border-top-left-radius: 10px; }
-        .row-terbit  { background: rgba(140, 30, 60, 0.75); margin: -3px -16px; padding: 4px 16px; }
-        .row-jumat   { background: rgba(30, 130, 70, 0.75); margin: -3px -16px; padding: 4px 16px; }
-        .row-ashar   { background: rgba(20, 100, 50, 0.75); margin: -3px -16px; padding: 4px 16px; }
-        .row-maghrib { background: rgba(50, 50, 60, 0.85); margin: -3px -16px; padding: 4px 16px; }
-        .row-isya    { background: rgba(70, 30, 90, 0.85); margin: -3px -16px; padding: 4px 16px; border-bottom-left-radius: 10px; }
+        .row-shubuh { background: rgba(180, 40, 40, 0.80); margin: 0 -18px; padding: 6px 18px; border-top-left-radius: 10px; }
+        .row-terbit  { background: rgba(140, 30, 60, 0.80); margin: 0 -18px; padding: 6px 18px; }
+        .row-jumat   { background: rgba(30, 130, 70, 0.80); margin: 0 -18px; padding: 6px 18px; }
+        .row-ashar   { background: rgba(20, 100, 50, 0.80); margin: 0 -18px; padding: 6px 18px; }
+        .row-maghrib { background: rgba(50, 50, 60, 0.88); margin: 0 -18px; padding: 6px 18px; }
+        .row-isya    { background: rgba(70, 30, 90, 0.88); margin: 0 -18px; padding: 6px 18px; border-bottom-left-radius: 10px; }
 
-        /* === JAM ANALOG DI TENGAH ATAS (TIDAK MENUTUP JADWAL) === */
+        /* === JAM ANALOG DI SAMPING PANEL JADWAL === */
         .clock-wrap {
-            position: absolute;
-            top: 14px;
-            left: 375px;
-            width: 170px;
-            height: 170px;
+            width: 190px;
+            height: 190px;
             background: radial-gradient(circle, #8b1e24, #4a0d11);
             border-radius: 50%;
-            border: 4px solid #ffd300;
-            box-shadow: 0 0 20px rgba(0,0,0,0.6);
-            z-index: 10;
+            border: 5px solid #ffd300;
+            box-shadow: 0 0 25px rgba(0,0,0,0.6);
+            position: relative;
+            margin-top: 20px;
         }
         .clock-face { position: relative; width: 100%; height: 100%; }
-        .c-num { position: absolute; font-size: 14px; font-weight: 700; color: #fff; }
-        .c12 { top: 8px; left: 50%; transform: translateX(-50%); }
-        .c3  { right: 10px; top: 50%; transform: translateY(-50%); }
-        .c6  { bottom: 8px; left: 50%; transform: translateX(-50%); }
-        .c9  { left: 10px; top: 50%; transform: translateY(-50%); }
+        .c-num { position: absolute; font-size: 15px; font-weight: 700; color: #fff; }
+        .c12 { top: 10px; left: 50%; transform: translateX(-50%); }
+        .c3  { right: 12px; top: 50%; transform: translateY(-50%); }
+        .c6  { bottom: 10px; left: 50%; transform: translateX(-50%); }
+        .c9  { left: 12px; top: 50%; transform: translateY(-50%); }
 
         .hand {
             position: absolute;
@@ -102,14 +111,14 @@
             transform-origin: bottom center;
             border-radius: 4px;
         }
-        .h-hand { width: 5px; height: 42px; margin-left: -2.5px; background: #fff; }
-        .m-hand { width: 3px; height: 62px; margin-left: -1.5px; background: #ffd300; }
-        .s-hand { width: 2px; height: 68px; margin-left: -1px; background: #ff3333; }
+        .h-hand { width: 5px; height: 48px; margin-left: -2.5px; background: #fff; }
+        .m-hand { width: 3px; height: 70px; margin-left: -1.5px; background: #ffd300; }
+        .s-hand { width: 2px; height: 78px; margin-left: -1px; background: #ff3333; }
         .c-dot {
             position: absolute;
             top: 50%; left: 50%;
             transform: translate(-50%, -50%);
-            width: 10px; height: 10px;
+            width: 11px; height: 11px;
             background: #ffd300;
             border-radius: 50%;
         }
@@ -117,12 +126,12 @@
         /* === KANAN ATAS: NAMA MASJID & TANGGAL === */
         .mosque-top {
             position: absolute;
-            top: 14px;
+            top: 12px;
             right: 20px;
             text-align: right;
         }
         .m-name {
-            font-size: 36px;
+            font-size: 38px;
             font-weight: 900;
             color: #ffd300;
             text-shadow: 2px 2px 8px rgba(0,0,0,0.8);
@@ -143,10 +152,10 @@
 
         .date-box {
             position: absolute;
-            top: 75px;
+            top: 72px;
             right: 20px;
-            background: rgba(10, 25, 50, 0.80);
-            padding: 5px 14px;
+            background: rgba(10, 25, 50, 0.85);
+            padding: 6px 16px;
             border-radius: 6px;
             border: 1px solid rgba(255,255,255,0.2);
             font-size: 15px;
@@ -157,86 +166,87 @@
 
         /* === BARIS BAWAH: RUNNING TEXT === */
         .bottom-bar {
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            right: 0;
+            width: 100%;
             background: rgba(0, 15, 45, 0.92);
-            padding: 8px 20px;
+            padding: 10px 20px;
             display: flex;
             align-items: center;
             border-top: 2px solid #ffd300;
-            font-size: 16px;
+            font-size: 17px;
             color: #fff;
             box-shadow: 0 -5px 20px rgba(0,0,0,0.5);
+            border-radius: 8px;
         }
     </style>
 </head>
 <body>
 
     <div class="wrapper">
-        <!-- Panel Jadwal Kiri -->
-        <div class="schedule-panel">
-            <div class="s-row row-shubuh">
-                <div class="s-left">
-                    <div class="s-name"><span class="s-icon">☀️</span> Shubuh</div>
-                    <div class="s-note">IQAMAH <span id="iqamah-subuh">--:--</span></div>
+        <!-- Bagian Atas & Tengah (Panel Kiri & Jam Samping) -->
+        <div class="main-content">
+            <!-- Panel Jadwal Kiri dengan Ukuran Angka Besar -->
+            <div class="schedule-panel">
+                <div class="s-row row-shubuh">
+                    <div class="s-left">
+                        <div class="s-name"><span class="s-icon">☀️</span> Shubuh</div>
+                        <div class="s-note">IQAMAH <span id="iqamah-subuh">--:--</span></div>
+                    </div>
+                    <div id="time-subuh" class="s-val">--:--</div>
                 </div>
-                <div id="time-subuh" class="s-val">--:--</div>
-            </div>
-            
-            <div class="s-row row-terbit">
-                <div class="s-left">
-                    <div class="s-name"><span class="s-icon">🌅</span> Terbit</div>
-                    <div class="s-note">Terbit Matahari</div>
+                
+                <div class="s-row row-terbit">
+                    <div class="s-left">
+                        <div class="s-name"><span class="s-icon">🌅</span> Terbit</div>
+                        <div class="s-note">Terbit Matahari</div>
+                    </div>
+                    <div id="time-terbit" class="s-val">--:--</div>
                 </div>
-                <div id="time-terbit" class="s-val">--:--</div>
+
+                <div class="s-row row-jumat">
+                    <div class="s-left">
+                        <div class="s-name"><span class="s-icon">☀️</span> Dzuhur</div>
+                        <div class="s-note">IQAMAH <span id="iqamah-dzuhur">--:--</span></div>
+                    </div>
+                    <div id="time-dzuhur" class="s-val">--:--</div>
+                </div>
+
+                <div class="s-row row-ashar">
+                    <div class="s-left">
+                        <div class="s-name"><span class="s-icon">⛅</span> Ashar</div>
+                        <div class="s-note">IQAMAH <span id="iqamah-ashar">--:--</span></div>
+                    </div>
+                    <div id="time-ashar" class="s-val">--:--</div>
+                </div>
+
+                <div class="s-row row-maghrib">
+                    <div class="s-left">
+                        <div class="s-name"><span class="s-icon">🌇</span> Maghrib</div>
+                        <div class="s-note">IQAMAH <span id="iqamah-maghrib">--:--</span></div>
+                    </div>
+                    <div id="time-maghrib" class="s-val">--:--</div>
+                </div>
+
+                <div class="s-row row-isya">
+                    <div class="s-left">
+                        <div class="s-name"><span class="s-icon">🌙</span> Isya</div>
+                        <div class="s-note">IQAMAH <span id="iqamah-isya">--:--</span></div>
+                    </div>
+                    <div id="time-isya" class="s-val">--:--</div>
+                </div>
             </div>
 
-            <div class="s-row row-jumat">
-                <div class="s-left">
-                    <div class="s-name"><span class="s-icon">☀️</span> Dzuhur</div>
-                    <div class="s-note">IQAMAH <span id="iqamah-dzuhur">--:--</span></div>
+            <!-- Jam Analog Rapi di Samping Kiri (Di luar Panel Jadwal) -->
+            <div class="clock-wrap">
+                <div class="clock-face">
+                    <div class="c-num c12">12</div>
+                    <div class="c-num c3">3</div>
+                    <div class="c-num c6">6</div>
+                    <div class="c-num c9">9</div>
+                    <div class="hand h-hand" id="hHand"></div>
+                    <div class="hand m-hand" id="mHand"></div>
+                    <div class="hand s-hand" id="sHand"></div>
+                    <div class="c-dot"></div>
                 </div>
-                <div id="time-dzuhur" class="s-val">--:--</div>
-            </div>
-
-            <div class="s-row row-ashar">
-                <div class="s-left">
-                    <div class="s-name"><span class="s-icon">⛅</span> Ashar</div>
-                    <div class="s-note">IQAMAH <span id="iqamah-ashar">--:--</span></div>
-                </div>
-                <div id="time-ashar" class="s-val">--:--</div>
-            </div>
-
-            <div class="s-row row-maghrib">
-                <div class="s-left">
-                    <div class="s-name"><span class="s-icon">🌇</span> Maghrib</div>
-                    <div class="s-note">IQAMAH <span id="iqamah-maghrib">--:--</span></div>
-                </div>
-                <div id="time-maghrib" class="s-val">--:--</div>
-            </div>
-
-            <div class="s-row row-isya">
-                <div class="s-left">
-                    <div class="s-name"><span class="s-icon">🌙</span> Isya</div>
-                    <div class="s-note">IQAMAH <span id="iqamah-isya">--:--</span></div>
-                </div>
-                <div id="time-isya" class="s-val">--:--</div>
-            </div>
-        </div>
-
-        <!-- Jam Analog di Tengah Atas (Tidak Menutupi Jadwal) -->
-        <div class="clock-wrap">
-            <div class="clock-face">
-                <div class="c-num c12">12</div>
-                <div class="c-num c3">3</div>
-                <div class="c-num c6">6</div>
-                <div class="c-num c9">9</div>
-                <div class="hand h-hand" id="hHand"></div>
-                <div class="hand m-hand" id="mHand"></div>
-                <div class="hand s-hand" id="sHand"></div>
-                <div class="c-dot"></div>
             </div>
         </div>
 
