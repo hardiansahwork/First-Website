@@ -3,354 +3,133 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Masjid Al-Kautsar — Puri Mega Citra, Ciparay, Bandung</title>
-    <!-- Google Fonts -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    <!-- Font Awesome Ikon -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.0/css/all.min.css">
+    <title>Informasi Mesjid Al-Kautsar</title>
+    <!-- Google Fonts: Plus Jakarta Sans & Amiri untuk nuansa Islami yang modern -->
+    <link href="https://fonts.googleapis.com/css2?family=Amiri:wght@700&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <!-- Tailwind CSS untuk styling cepat dan rapi -->
+    <script src="https://cdn.tailwindcss.com"></script>
     <style>
-        :root {
-            --hijau-tua: #0f5132;
-            --hijau-muda: #198754;
-            --emas: #d4af37;
-            --putih: #ffffff;
-            --abu-lembut: #f8f9fa;
-            --teks: #333333;
-        }
-        * { margin: 0; padding: 0; box-sizing: border-box; }
         body {
-            font-family: 'Inter', sans-serif;
-            color: var(--teks);
-            line-height: 1.6;
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            background: linear-gradient(135deg, #064e3b 0%, #022c22 100%);
+            overflow: hidden; /* Mencegah scroll di TV */
         }
-        h1, h2, h3 { font-family: 'Amiri', serif; }
-        a { text-decoration: none; color: inherit; }
-        .container { width: 90%; max-width: 1200px; margin: 0 auto; }
-
-        /* Navigasi */
-        nav {
-            background: var(--putih);
-            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
-            position: fixed;
-            width: 100%;
-            top: 0;
-            z-index: 999;
+        .font-amiri {
+            font-family: 'Amiri', serif;
         }
-        .nav-wrap {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 12px 0;
+        .glass-card {
+            background: rgba(255, 255, 255, 0.07);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.12);
         }
-        .logo {
-            font-size: 1.4rem;
-            font-weight: 700;
-            color: var(--hijau-tua);
-            display: flex;
-            align-items: center;
-            gap: 8px;
-        }
-        .logo i { color: var(--emas); }
-        .menu { display: flex; list-style: none; gap: 24px; }
-        .menu li a {
-            font-weight: 500;
-            color: var(--teks);
-            transition: color 0.3s;
-        }
-        .menu li a:hover { color: var(--hijau-muda); }
-        .tombol-donasi {
-            background: linear-gradient(135deg, var(--emas), #f0c808);
-            color: #000 !important;
-            padding: 8px 20px;
-            border-radius: 50px;
-            font-weight: 600;
-        }
-        .menu-toggle { display: none; font-size: 1.8rem; cursor: pointer; }
-
-        /* Hero Bagian Atas */
-        .hero {
-            margin-top: 70px;
-            background: linear-gradient(rgba(15,81,50,0.85), rgba(15,81,50,0.75)),
-                        url('https://images.unsplash.com/photo-1542816417-0983c9c9ad53?w=1200') center/cover no-repeat;
-            color: white;
-            padding: 100px 20px;
-            text-align: center;
-        }
-        .hero h1 { font-size: 3rem; margin-bottom: 12px; }
-        .hero p { font-size: 1.2rem; max-width: 700px; margin: 0 auto 30px; opacity: 0.9; }
-        .tombol {
-            display: inline-block;
-            padding: 12px 32px;
-            border-radius: 50px;
-            font-weight: 600;
-            margin: 6px;
-            transition: transform 0.3s;
-        }
-        .tombol:hover { transform: translateY(-2px); }
-        .tombol-putih { background: white; color: var(--hijau-tua); }
-        .tombol-transparan { border: 2px solid white; color: white; }
-
-        /* Jadwal Sholat */
-        .jadwal-section {
-            padding: 50px 20px;
-            background: var(--abu-lembut);
-        }
-        .jadwal-section h2 {
-            text-align: center;
-            font-size: 2rem;
-            margin-bottom: 30px;
-            color: var(--hijau-tua);
-        }
-        .jadwal-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
-            gap: 16px;
-        }
-        .kartu-waktu {
-            background: white;
-            padding: 20px;
-            border-radius: 12px;
-            text-align: center;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.06);
-            border-top: 4px solid var(--hijau-muda);
-        }
-        .kartu-waktu h3 {
-            font-size: 1.2rem;
-            color: var(--hijau-tua);
-            margin-bottom: 8px;
-        }
-        .kartu-waktu .waktu { font-size: 1.3rem; font-weight: 700; }
-        .catatan-jadwal {
-            text-align: center;
-            margin-top: 20px;
-            font-size: 0.9rem;
-            color: #666;
-        }
-
-        /* Bagian Umum */
-        .section { padding: 50px 20px; }
-        .section h2 {
-            text-align: center;
-            font-size: 2rem;
-            margin-bottom: 30px;
-            color: var(--hijau-tua);
-        }
-        .grid-2 {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 40px;
-            align-items: center;
-        }
-        .gambar-bulat {
-            width: 100%;
-            border-radius: 16px;
-            box-shadow: 0 6px 16px rgba(0,0,0,0.1);
-        }
-        .konten h3 { color: var(--hijau-tua); margin-bottom: 16px; font-size: 1.4rem; }
-        .konten p { margin-bottom: 12px; }
-        .daftar-kegiatan { list-style: none; margin-top: 10px; }
-        .daftar-kegiatan li { padding: 8px 0; border-bottom: 1px solid #eee; }
-        .daftar-kegiatan li i { color: var(--emas); margin-right: 10px; }
-
-        /* Laporan Keuangan */
-        .laporan { background: var(--abu-lembut); }
-        .kotak-laporan {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 20px;
-            text-align: center;
-        }
-        .lap-kartu {
-            background: white;
-            padding: 25px;
-            border-radius: 12px;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.06);
-        }
-        .lap-kartu h3 { font-size: 1rem; color: #666; margin-bottom: 8px; }
-        .lap-nilai { font-size: 1.6rem; font-weight: 700; color: var(--hijau-tua); }
-
-        /* Kontak */
-        .kontak-info { list-style: none; margin-top: 15px; }
-        .kontak-info li { padding: 8px 0; display: flex; align-items: flex-start; gap: 10px; }
-        .kontak-info li i { color: var(--hijau-muda); margin-top: 4px; }
-
-        /* Kaki Halaman */
-        footer {
-            background: #111;
-            color: #ccc;
-            padding: 30px 20px;
-            text-align: center;
-            font-size: 0.9rem;
-        }
-        footer p { margin-bottom: 6px; }
-
-        /* Responsif HP */
-        @media(max-width:768px) {
-            .menu {
-                position: absolute;
-                top: 60px; right: 0;
-                flex-direction: column;
-                background: white;
-                width: 240px;
-                padding: 20px;
-                box-shadow: -2px 4px 10px rgba(0,0,0,0.1);
-                display: none;
-            }
-            .menu.aktif { display: flex; }
-            .menu-toggle { display: block; }
-            .hero h1 { font-size: 2rem; }
+        .active-prayer {
+            background: linear-gradient(135deg, #10b981 0%, #059669 100%) !important;
+            border-color: #34d399 !important;
+            box-shadow: 0 10px 25px -5px rgba(16, 185, 129, 0.4);
+            transform: scale(1.03);
+            transition: all 0.3s ease;
         }
     </style>
 </head>
-<body>
-    <!-- Navigasi -->
-    <nav>
-        <div class="container nav-wrap">
-            <a href="#" class="logo">
-                <i class="fas fa-mosque"></i> Al-Kautsar
-            </a>
-            <ul class="menu" id="menuUtama">
-                <li><a href="#beranda">Beranda</a></li>
-                <li><a href="#jadwal">Jadwal Sholat</a></li>
-                <li><a href="#profil">Profil</a></li>
-                <li><a href="#kegiatan">Kegiatan</a></li>
-                <li><a href="#laporan">Keuangan</a></li>
-                <li><a href="#kontak">Kontak</a></li>
-                <li><a href="#donasi" class="tombol-donasi">Donasi</a></li>
-            </ul>
-            <div class="menu-toggle" id="tombolMenu"><i class="fas fa-bars"></i></div>
-        </div>
-    </nav>
+<body class="text-white h-screen w-screen flex flex-col justify-between p-8">
 
-    <!-- Bagian Atas -->
-    <section class="hero" id="beranda">
-        <div class="container">
-            <h1>Masjid Al-Kautsar</h1>
-            <p>Komplek Perumahan Puri Mega Citra — Ciheulang, Ciparay, Kabupaten Bandung<br>
-                <em>“Dari Masjid Membangun Umat”</em>
-            </p>
-            <a href="#jadwal" class="tombol tombol-putih">Lihat Jadwal Sholat</a>
-            <a href="#kontak" class="tombol tombol-transparan">Lokasi Masjid</a>
-        </div>
-    </section>
-
-    <!-- Jadwal Sholat -->
-    <section class="jadwal-section" id="jadwal">
-        <div class="container">
-            <h2>Jadwal Waktu Sholat</h2>
-            <div class="jadwal-grid">
-                <div class="kartu-waktu">
-                    <h3>Subuh</h3>
-                    <div class="waktu">04:32</div>
-                </div>
-                <div class="kartu-waktu">
-                    <h3>Dzuhur</h3>
-                    <div class="waktu">11:58</div>
-                </div>
-                <div class="kartu-waktu">
-                    <h3>Ashar</h3>
-                    <div class="waktu">15:15</div>
-                </div>
-                <div class="kartu-waktu">
-                    <h3>Maghrib</h3>
-                    <div class="waktu">17:45</div>
-                </div>
-                <div class="kartu-waktu">
-                    <h3>Isya</h3>
-                    <div class="waktu">19:00</div>
-                </div>
+    <!-- HEADER: Identitas Mesjid & Jam Utama -->
+    <header class="flex justify-between items-center glass-card rounded-2xl px-8 py-5 shadow-2xl">
+        <div class="flex items-center space-x-5">
+            <div class="bg-emerald-500/20 p-3.5 rounded-xl border border-emerald-500/30">
+                <!-- Ikon Masjid SVG -->
+                <svg class="w-10 h-10 text-emerald-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round5" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0H5m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"></path>
+                </svg>
             </div>
-            <p class="catatan-jadwal">* Waktu bersifat perkiraan, silakan lihat papan pengumuman masjid untuk waktu akurat hari ini</p>
-        </div>
-    </section>
-
-    <!-- Profil Masjid -->
-    <section class="section" id="profil">
-        <div class="container grid-2">
             <div>
-                <img src="https://images.unsplash.com/photo-1582657233895-0f37a1fddc94?w=600" alt="Masjid Al-Kautsar" class="gambar-bulat">
-            </div>
-            <div class="konten">
-                <h3>Tentang Masjid Al-Kautsar</h3>
-                <p>Masjid Al-Kautsar berdiri di tengah lingkungan Komplek Perumahan Puri Mega Citra, Ciheulang, Ciparay, Kabupaten Bandung. Menjadi pusat ibadah sekaligus tempat berkumpulnya masyarakat untuk kegiatan keagamaan, pendidikan, dan sosial.</p>
-                <p>Masjid ini didirikan untuk melayani kebutuhan ibadah warga sekitar, serta menjadi wadah pembinaan akhlak dan keilmuan bagi anak-anak dan remaja.</p>
-                <p><strong>Alamat:</strong> Komplek Puri Mega Citra, Ciheulang, Ciparay, Kab. Bandung, Jawa Barat</p>
+                <h1 class="text-3xl font-extrabold tracking-wide text-emerald-300 font-amiri">MESJID AL-KAUTSAR</h1>
+                <p class="text-sm text-emerald-100/80 font-medium">Komplek Puri Mega Citra, Ciheulang, Ciparay, Kab. Bandung</p>
             </div>
         </div>
-    </section>
-
-    <!-- Kegiatan -->
-    <section class="section laporan" id="kegiatan">
-        <div class="container">
-            <h2>Kegiatan & Program</h2>
-            <div class="grid-2">
-                <div class="konten">
-                    <h3>Jadwal Rutin</h3>
-                    <ul class="daftar-kegiatan">
-                        <li><i class="fas fa-check-circle"></i> Sholat Berjamaah 5 Waktu — Setiap Hari</li>
-                        <li><i class="fas fa-check-circle"></i> Pengajian Ibu-ibu — Selasa Pagi</li>
-                        <li><i class="fas fa-check-circle"></i> TPA / Madrasah Diniyah — Senin–Jumat Sore</li>
-                        <li><i class="fas fa-check-circle"></i> Pengajian Umum — Sabtu Malam Ahad</li>
-                        <li><i class="fas fa-check-circle"></i> Kajian Remaja — Minggu Sore</li>
-                    </ul>
-                </div>
-                <div class="konten">
-                    <h3>Program Mendatang</h3>
-                    <ul class="daftar-kegiatan">
-                        <li><i class="fas fa-calendar-alt"></i> Peringatan Maulid Nabi ﷺ — 12 Rabiul Awal</li>
-                        <li><i class="fas fa-calendar-alt"></i> Kajian Ramadhan — Awal Bulan Puasa</li>
-                        <li><i class="fas fa-calendar-alt"></i> Santunan Anak Yatim — Setiap 2 Bulan Sekali</li>
-                        <li><i class="fas fa-calendar-alt"></i> Kerja Bakti Kebersihan Masjid — Terjadwal</li>
-                    </ul>
-                </div>
-            </div>
+        
+        <!-- Jam & Tanggal Realtime -->
+        <div class="text-right">
+            <div id="live-clock" class="text-4xl font-black tracking-wider text-emerald-400">00:00:00</div>
+            <div id="live-date" class="text-sm font-medium text-emerald-100/80 mt-0.5">Memuat tanggal...</div>
         </div>
-    </section>
+    </header>
 
-    <!-- Laporan Keuangan / Donasi -->
-    <section class="section" id="laporan">
-        <div class="container">
-            <h2>Laporan Keuangan Bulanan</h2>
-            <p style="text-align:center;max-width:600px;margin:0 auto 30px;">Transparansi pengelolaan dana masjid untuk kepercayaan bersama</p>
-            <div class="kotak-laporan">
-                <div class="lap-kartu">
-                    <h3>Pemasukan Bulan Ini</h3>
-                    <div class="lap-nilai">Rp 4.850.000</div>
-                </div>
-                <div class="lap-kartu">
-                    <h3>Pengeluaran Bulan Ini</h3>
-                    <div class="lap-nilai">Rp 3.200.000</div>
-                </div>
-                <div class="lap-kartu">
-                    <h3>Saldo Saat Ini</h3>
-                    <div class="lap-nilai">Rp 15.600.000</div>
-                </div>
-            </div>
-            <p style="text-align:center;margin-top:25px;"><em>Data per awal November 2026 — laporan lengkap tersedia di papan pengumuman masjid</em></p>
-
-            <div style="text-align:center;margin-top:40px;" id="donasi">
-                <h3>Salurkan Donasi Anda</h3>
-                <p>Untuk pemeliharaan masjid dan kegiatan sosial, dapat disalurkan melalui:</p>
-                <div style="background:#fff;padding:25px;border-radius:12px;max-width:500px;margin:20px auto;box-shadow:0 4px 12px rgba(0,0,0,0.06);">
-                    <p><strong>Bank BSI — a.n. Masjid Al-Kautsar</strong><br>
-                    No. Rekening: <span style="font-size:1.2rem;font-weight:700;">723-456-7890</span></p>
-                    <p>Atau langsung kepada pengurus masjid.</p>
-                </div>
-            </div>
+    <!-- CONTENT BODY: Ayat/Hadits Utama & Info Berjalan -->
+    <main class="grid grid-cols-12 gap-6 my-6 flex-grow items-center">
+        <!-- Kolom Kiri: Pesan / Kutipan Islami -->
+        <div class="col-span-12 glass-card rounded-2xl p-8 text-center relative overflow-hidden shadow-xl">
+            <div class="absolute -right-10 -bottom-10 text-emerald-600/10 font-amiri text-9{-}select-none"></div>
+            <p class="text-xl font-amiri text-emerald-200 mb-2">"Sesungguhnya shalat itu adalah fardhu yang ditentukan waktunya atas orang-orang yang beriman."</p>
+            <span class="text-xs uppercase tracking-widest text-emerald-400 font-semibold">(QS. An-Nisa: 103)</span>
         </div>
-    </section>
+    </main>
 
-    <!-- Kontak -->
-    <section class="section laporan" id="kontak">
-        <div class="container">
-            <h2>Hubungi Kami</h2>
-            <div class="grid-2">
-                <div>
-                    <h3>Informasi Kontak</h3>
-                    <ul class="kontak-info">
-                        <li><i class="fas fa-map-marker-alt"></i> Komplek Puri Mega Citra, Ciheulang, Kec. Ciparay, Kab. Bandung, Jawa Barat — 40381</li>
-                        <li><i class="fab fa-whatsapp"></i> WhatsApp Pengurus: 08xx-xxxx-xxxx (Bpk. Ketua)</li>
-                        <li><i class="fas fa-envelope"></i> Email: masjidalkautsar.purimegacitra@gmail.com</li>
-                    </ul
+    <!-- FOOTER: Jadwal Sholat Otomatis Kemenag RI -->
+    <footer class="grid grid-cols-5 gap-5">
+        <!-- Subuh -->
+        <div id="card-subuh" class="glass-card rounded-2xl p-5 text-center transition-all duration-300">
+            <h3 class="text-emerald-300 font-bold uppercase tracking-wider text-sm mb-1">Subuh</h3>
+            <div id="time-subuh" class="text-3xl font-black text-white">--:--</div>
+        </div>
+        <!-- Dzuhur -->
+        <div id="card-dzuhur" class="glass-card rounded-2xl p-5 text-center transition-all duration-300">
+            <h3 class="text-emerald-300 font-bold uppercase tracking-wider text-sm mb-1">Dzuhur</h3>
+            <div id="time-dzuhur" class="text-3xl font-black text-white">--:--</div>
+        </div>
+        <!-- Ashar -->
+        <div id="card-ashar" class="glass-card rounded-2xl p-5 text-center transition-all duration-300">
+            <h3 class="text-emerald-300 font-bold uppercase tracking-wider text-sm mb-1">Ashar</h3>
+            <div id="time-ashar" class="text-3xl font-black text-white">--:--</div>
+        </div>
+        <!-- Maghrib -->
+        <div id="card-maghrib" class="glass-card rounded-2xl p-5 text-center transition-all duration-300">
+            <h3 class="text-emerald-300 font-bold uppercase tracking-wider text-sm mb-1">Maghrib</h3>
+            <div id="time-maghrib" class="text-3xl font-black text-white">--:--</div>
+        </div>
+        <!-- Isya -->
+        <div id="card-isya" class="glass-card rounded-2xl p-5 text-center transition-all duration-300">
+            <h3 class="text-emerald-300 font-bold uppercase tracking-wider text-sm mb-1">Isya</h3>
+            <div id="time-isya" class="text-3xl font-black text-white">--:--</div>
+        </div>
+    </footer>
+
+    <!-- SCRIPT JAVASCRIPT: Jam Realtime & API Jadwal Sholat Kemenag RI -->
+    <script>
+        // 1. Fungsi Jam Realtime
+        function updateClock() {
+            const now = new Date();
+            document.getElementById('live-clock').innerText = now.toLocaleTimeString('id-ID', { hour12: false });
+            
+            const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
+            document.getElementById('live-date').innerText = now.toLocaleDateString('id-ID', options);
+        }
+        setInterval(updateClock, 1000);
+        updateClock();
+
+        // 2. Ambil Jadwal Sholat Otomatis (API Kemenag / MyQuran - ID 1211 untuk Kab. Bandung)
+        async function fetchJadwalSholat() {
+            const today = new Date().toISOString().split('T')[0];
+            const idKotaKabBandung = "1211"; 
+            const url = `https://api.myquran.com/v2/sholat/jadwal/${idKotaKabBandung}/${today}`;
+
+            try {
+                const response = await fetch(url);
+                const data = await response.json();
+                
+                if (data.status) {
+                    const j = data.data.jadwal;
+                    document.getElementById('time-subuh').innerText = j.subuh;
+                    document.getElementById('time-dzuhur').innerText = j.dzuhur;
+                    document.getElementById('time-ashar').innerText = j.ashar;
+                    document.getElementById('time-maghrib').innerText = j.maghrib;
+                    document.getElementById('time-isya').innerText = j.isya;
+                }
+            } catch (error) {
+                console.error("Gagal memuat jadwal sholat:", error);
+            }
+        }
+        fetchJadwalSholat();
+    </script>
+</body>
+</html>
